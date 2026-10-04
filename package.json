@@ -1,27 +1,18 @@
 {
-  "name": "10xgraph-docs",
+  "name": "10xgraph-monorepo",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Documentation and blog for 10xGraph. Static Astro site built for search and AI readability.",
   "scripts": {
-    "dev": "npm run search:index && astro dev",
-    "dev:fast": "astro dev",
-    "build": "astro build && pagefind --site dist",
-    "search:index": "astro build && pagefind --site dist --output-path public/pagefind",
-    "preview": "astro preview",
-    "check": "astro check"
-  },
-  "dependencies": {
-    "@astrojs/mdx": "^8.0.2",
-    "@astrojs/rss": "^4.0.19",
-    "@astrojs/sitemap": "^3.7.4",
-    "astro": "^7.3.5"
+    "dev": "turbo dev",
+    "dev:landing": "pnpm --filter @10xgraph/landing dev",
+    "dev:docs": "pnpm --filter 10xgraph-docs dev",
+    "build": "turbo build",
+    "check": "turbo check"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.10",
-    "@shikijs/transformers": "^4.5.0",
-    "pagefind": "^1.5.2",
+    "turbo": "^2.4.4",
     "typescript": "^5.9.3"
-  }
+  },
+  "packageManager": "pnpm@11.9.0"
 }

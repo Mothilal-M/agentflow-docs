@@ -1,0 +1,179 @@
+---
+// apps/landing/src/pages/index.astro
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>10xGraph - State-Graph Execution for Autonomous AI Agents</title>
+  <meta name="description" content="10xGraph coordinates autonomous AI agents across state graphs with checkpointing, time-travel debugging, and multi-LLM telemetry." />
+  <link rel="stylesheet" href="/node_modules/@10xgraph/ui/src/tokens.css" />
+  <style>
+    @import "@10xgraph/ui/tokens.css";
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    .hero-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 1.5rem;
+    }
+
+    #hero-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: auto;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 840px;
+      pointer-events: none;
+    }
+
+    .hero-content * {
+      pointer-events: auto;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      background: rgba(200, 255, 61, 0.1);
+      border: 1px solid rgba(200, 255, 61, 0.3);
+      color: var(--signal);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.08;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title span.accent {
+      color: var(--signal);
+    }
+
+    .hero-desc {
+      font-size: 1.15rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      max-width: 640px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--signal);
+      color: var(--signal-text);
+      padding: 0.85rem 1.85rem;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: var(--transition-fast);
+      box-shadow: 0 0 25px rgba(200, 255, 61, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: var(--signal-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.85rem 1.85rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: var(--transition-fast);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .btn-ghost:hover {
+      background: var(--surface-2);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="hero-container bg-grid-graph">
+    <canvas id="hero-canvas"></canvas>
+
+    <div class="hero-content">
+      <div class="badge">
+        <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--signal);"></span>
+        10xGraph Engine v0.1
+      </div>
+      <h1 class="hero-title">
+        The State-Graph Engine for <span class="accent">Autonomous AI</span>
+      </h1>
+      <p class="hero-desc">
+        Orchestrate multi-agent clusters across directed state graphs. Built for deterministic replay, time-travel checkpoints, and sub-millisecond execution telemetry.
+      </p>
+      <div class="hero-actions">
+        <a href="https://docs.10xgraph.com" class="btn-primary">Explore Documentation →</a>
+        <a href="https://github.com/10xGraph" class="btn-ghost">View on GitHub</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    import { GraphEngine } from '@10xgraph/ui';
+
+    const canvas = document.getElementById('hero-canvas');
+    if (canvas instanceof HTMLCanvasElement) {
+      const engine = new GraphEngine(canvas, {
+        nodeCount: 22,
+        maxDistance: 170,
+        interactive: true,
+        theme: 'dark'
+      });
+      engine.init();
+    }
+  </script>
+</body>
+</html>

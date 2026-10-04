@@ -13,7 +13,7 @@ import { codeFrame } from './src/lib/code-frame.mjs';
 // Static output only. Canonical URLs have no trailing slash; pages build to /path.html,
 // which static hosts (Cloudflare Pages, Netlify, Vercel, GitHub Pages) serve at /path.
 export default defineConfig({
-  site: 'https://10xgraph.com',
+  site: 'https://docs.10xgraph.com',
   output: 'static',
   trailingSlash: 'never',
   build: { format: 'file' },

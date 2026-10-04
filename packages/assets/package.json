@@ -1,0 +1,10 @@
+{
+  "name": "@10xgraph/assets",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./logo/*": "./logo/*",
+    "./icons/*": "./icons/*"
+  }
+}

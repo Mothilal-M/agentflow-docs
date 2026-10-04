@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%" fill="none">
+  <defs>
+    <filter id="glow-lime-3" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="glow-amber" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Isometric / Hexagonal Graph Mesh Structure -->
+  <!-- Outer Hexagonal Node Perimeters -->
+  <!-- Top, Top-Right, Bottom-Right, Bottom, Bottom-Left, Top-Left -->
+  <!-- (100, 35), (155, 68), (155, 132), (100, 165), (45, 132), (45, 68) -->
+
+  <!-- Outer Boundary Edges -->
+  <polygon points="100,35 155,68 155,132 100,165 45,132 45,68" 
+           stroke="#5EE6F0" stroke-width="2" stroke-opacity="0.3" stroke-dasharray="4 4" fill="none"/>
+
+  <!-- Primary Internal Execution Graph Edges -->
+  <!-- Path 1: Ingest -> Core -->
+  <line x1="45" y1="68" x2="100" y2="100" stroke="#5EE6F0" stroke-width="3" stroke-linecap="round"/>
+  <!-- Path 2: Checkpoint Branch (Amber) -->
+  <line x1="100" y1="35" x2="100" y2="100" stroke="#FFB454" stroke-width="3" stroke-linecap="round"/>
+  <!-- Path 3: Core -> Multi-Agent Swarm -->
+  <line x1="100" y1="100" x2="155" y2="68" stroke="#C8FF3D" stroke-width="4" stroke-linecap="round"/>
+  <!-- Path 4: Swarm -> Verification -->
+  <line x1="155" y1="68" x2="155" y2="132" stroke="#C8FF3D" stroke-width="4" stroke-linecap="round"/>
+  <!-- Path 5: Verification -> Memory Store -->
+  <line x1="155" y1="132" x2="100" y2="165" stroke="#5EE6F0" stroke-width="3" stroke-linecap="round"/>
+  <!-- Path 6: Memory -> Core Loop -->
+  <line x1="100" y1="165" x2="45" y2="132" stroke="#5EE6F0" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="45" y1="132" x2="100" y2="100" stroke="#5EE6F0" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Secondary Cross-Links forming the internal dynamic "10x" lattice -->
+  <line x1="45" y1="68" x2="155" y2="132" stroke="#C8FF3D" stroke-width="1.5" stroke-opacity="0.35"/>
+  <line x1="45" y1="132" x2="155" y2="68" stroke="#C8FF3D" stroke-width="1.5" stroke-opacity="0.35"/>
+
+  <!-- Satellite Nodes -->
+  <!-- Checkpoint Node (Top) -->
+  <circle cx="100" cy="35" r="7" fill="#07080B" stroke="#FFB454" stroke-width="2"/>
+  <circle cx="100" cy="35" r="3" fill="#FFB454" filter="url(#glow-amber)"/>
+
+  <!-- Ingest Node (Top-Left) -->
+  <circle cx="45" cy="68" r="8" fill="#07080B" stroke="#5EE6F0" stroke-width="2"/>
+  <circle cx="45" cy="68" r="3.5" fill="#5EE6F0"/>
+
+  <!-- Agent Swarm Node (Top-Right) -->
+  <circle cx="155" cy="68" r="9" fill="#07080B" stroke="#C8FF3D" stroke-width="2.5"/>
+  <circle cx="155" cy="68" r="4.5" fill="#C8FF3D" filter="url(#glow-lime-3)"/>
+
+  <!-- Evaluator Node (Bottom-Right) -->
+  <circle cx="155" cy="132" r="9" fill="#07080B" stroke="#C8FF3D" stroke-width="2.5"/>
+  <circle cx="155" cy="132" r="4.5" fill="#C8FF3D" filter="url(#glow-lime-3)"/>
+
+  <!-- State DB Node (Bottom) -->
+  <circle cx="100" cy="165" r="7" fill="#07080B" stroke="#5EE6F0" stroke-width="2"/>
+  <circle cx="100" cy="165" r="3" fill="#5EE6F0"/>
+
+  <!-- Feedback Node (Bottom-Left) -->
+  <circle cx="45" cy="132" r="7" fill="#07080B" stroke="#5EE6F0" stroke-width="2"/>
+  <circle cx="45" cy="132" r="3" fill="#5EE6F0"/>
+
+  <!-- Central Orchestrator Core Node -->
+  <circle cx="100" cy="100" r="16" fill="#C8FF3D" fill-opacity="0.12" filter="url(#glow-lime-3)"/>
+  <circle cx="100" cy="100" r="12" fill="#07080B" stroke="#C8FF3D" stroke-width="3"/>
+  <circle cx="100" cy="100" r="5" fill="#C8FF3D" filter="url(#glow-lime-3)"/>
+</svg>
