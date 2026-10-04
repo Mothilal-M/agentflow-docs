@@ -1,6 +1,12 @@
 ---
 // apps/landing/src/pages/index.astro
 import { Logo, Button, InstallPill, GraphCanvas, CommandPalette } from '@10xgraph/ui';
+import EcosystemStrip from '../components/EcosystemStrip.astro';
+import CodeToProduction from '../components/CodeToProduction.astro';
+import FeatureBento from '../components/FeatureBento.astro';
+import CompareMatrix from '../components/CompareMatrix.astro';
+import FinalCta from '../components/FinalCta.astro';
+import Footer from '../components/Footer.astro';
 ---
 
 <!DOCTYPE html>
@@ -8,7 +14,7 @@ import { Logo, Button, InstallPill, GraphCanvas, CommandPalette } from '@10xgrap
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>10xGraph - The State-Graph Engine for Autonomous AI</title>
+  <title>10xGraph - State-Graph Engine for Autonomous AI</title>
   <meta name="description" content="Orchestrate multi-agent clusters across directed state graphs. Built for deterministic replay, time-travel checkpoints, and sub-millisecond execution telemetry." />
   <link rel="stylesheet" href="/node_modules/@10xgraph/ui/src/tokens.css" />
   <link rel="stylesheet" href="/node_modules/@10xgraph/ui/src/fonts.css" />
@@ -33,11 +39,11 @@ import { Logo, Button, InstallPill, GraphCanvas, CommandPalette } from '@10xgrap
     /* Floating Navbar */
     .nav-bar {
       position: fixed;
-      top: 1rem;
+      top: 1.25rem;
       left: 50%;
       transform: translateX(-50%);
-      width: calc(100% - 2rem);
-      max-width: 1080px;
+      width: calc(100% - 2.5rem);
+      max-width: 1120px;
       height: 3.75rem;
       border-radius: 9999px;
       background: rgba(14, 16, 20, 0.75);
@@ -53,10 +59,15 @@ import { Logo, Button, InstallPill, GraphCanvas, CommandPalette } from '@10xgrap
     }
 
     .nav-links {
-      display: flex;
+      display: none;
       align-items: center;
       gap: 1.75rem;
       list-style: none;
+    }
+    @media (min-width: 768px) {
+      .nav-links {
+        display: flex;
+      }
     }
 
     .nav-link {
@@ -71,6 +82,31 @@ import { Logo, Button, InstallPill, GraphCanvas, CommandPalette } from '@10xgrap
       color: var(--text);
     }
 
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .cmd-k-trigger {
+      display: none;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+    @media (min-width: 860px) {
+      .cmd-k-trigger {
+        display: inline-flex;
+      }
+    }
+
     /* Hero Section */
     .hero-container {
       position: relative;
@@ -81,7 +117,7 @@ import { Logo, Button, InstallPill, GraphCanvas, CommandPalette } from '@10xgrap
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 7rem 1.5rem 4rem;
+      padding: 8rem 1.5rem 5rem;
       overflow: hidden;
     }
 
@@ -97,7 +133,7 @@ import { Logo, Button, InstallPill, GraphCanvas, CommandPalette } from '@10xgrap
     .hero-content {
       position: relative;
       z-index: 2;
-      max-width: 880px;
+      max-width: 920px;
       pointer-events: none;
     }
 
@@ -109,21 +145,22 @@ import { Logo, Button, InstallPill, GraphCanvas, CommandPalette } from '@10xgrap
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.35rem 0.85rem;
+      padding: 0.4rem 0.95rem;
       border-radius: 9999px;
       background: rgba(200, 255, 61, 0.1);
       border: 1px solid rgba(200, 255, 61, 0.25);
       color: var(--signal);
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
-      margin-bottom: 1.75rem;
+      margin-bottom: 2rem;
     }
 
     .hero-title {
       font-family: var(--font-display);
-      font-size: clamp(2.75rem, 6.5vw, 5rem);
+      font-size: clamp(2.75rem, 6.5vw, 5.25rem);
       font-weight: 800;
       letter-spacing: -0.035em;
       line-height: 1.05;
@@ -136,10 +173,10 @@ import { Logo, Button, InstallPill, GraphCanvas, CommandPalette } from '@10xgrap
     }
 
     .hero-desc {
-      font-size: 1.15rem;
+      font-size: 1.18rem;
       line-height: 1.6;
       color: var(--text-muted);
-      max-width: 680px;
+      max-width: 700px;
       margin: 0 auto 2.5rem;
     }
 
@@ -167,13 +204,18 @@ import { Logo, Button, InstallPill, GraphCanvas, CommandPalette } from '@10xgrap
     </a>
 
     <ul class="nav-links">
-      <li><a href="https://docs.10xgraph.com/concepts" class="nav-link">Concepts</a></li>
-      <li><a href="https://docs.10xgraph.com/tutorials" class="nav-link">Tutorials</a></li>
-      <li><a href="https://docs.10xgraph.com/compare" class="nav-link">Comparisons</a></li>
-      <li><a href="https://docs.10xgraph.com/reference" class="nav-link">API Reference</a></li>
+      <li><a href="#architecture" class="nav-link">Architecture</a></li>
+      <li><a href="#features" class="nav-link">Features</a></li>
+      <li><a href="#compare" class="nav-link">Benchmarks</a></li>
+      <li><a href="https://docs.10xgraph.com" class="nav-link">Documentation</a></li>
     </ul>
 
-    <div style="display: flex; align-items: center; gap: 0.75rem;">
+    <div class="nav-actions">
+      <button class="cmd-k-trigger" onclick="window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true }))">
+        <span>Search</span>
+        <kbd style="padding: 0.1rem 0.3rem; background: rgba(255,255,255,0.08); border-radius: 4px;">⌘K</kbd>
+      </button>
+
       <a href="https://docs.10xgraph.com" style="text-decoration: none;">
         <Button size="sm" variant="primary" client:load>
           Read Docs →
@@ -182,7 +224,7 @@ import { Logo, Button, InstallPill, GraphCanvas, CommandPalette } from '@10xgrap
     </div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- Hero Section with Live Living Graph Canvas -->
   <div class="hero-container bg-grid-graph">
     <div class="hero-canvas-wrap">
       <GraphCanvas
@@ -196,8 +238,8 @@ import { Logo, Button, InstallPill, GraphCanvas, CommandPalette } from '@10xgrap
 
     <div class="hero-content">
       <div class="badge-pill">
-        <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--signal);"></span>
-        10xGraph v0.1 • Autonomous State-Graph Engine
+        <span style="width: 7px; height: 7px; border-radius: 50%; background: var(--signal); box-shadow: 0 0 8px var(--signal);"></span>
+        10xGraph Engine • v0.9.2 Architecture
       </div>
 
       <h1 class="hero-title">
@@ -211,7 +253,7 @@ import { Logo, Button, InstallPill, GraphCanvas, CommandPalette } from '@10xgrap
       <div class="hero-actions">
         <a href="https://docs.10xgraph.com/get-started/first-agent" style="text-decoration: none;">
           <Button size="lg" variant="primary" client:load>
-            Start Building Free →
+            Build Your First Agent →
           </Button>
         </a>
         <a href="https://github.com/10xGraph" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
@@ -222,10 +264,28 @@ import { Logo, Button, InstallPill, GraphCanvas, CommandPalette } from '@10xgrap
       </div>
 
       <div class="hero-install-wrapper">
-        <InstallPill command="pip install 10xgraph" prefix="$" client:load />
+        <InstallPill command="pip install 10xgraph 10xgraph-api" prefix="$" client:load />
       </div>
     </div>
   </div>
+
+  <!-- Section 3: Ecosystem Marquee Strip -->
+  <EcosystemStrip />
+
+  <!-- Section 4: Code to Production Interactive Pipeline -->
+  <CodeToProduction />
+
+  <!-- Section 5: Feature Bento Grid (6 Live Superpower Tiles) -->
+  <FeatureBento />
+
+  <!-- Section 9: Framework Comparison Matrix -->
+  <CompareMatrix />
+
+  <!-- Section 10: Final Conversion CTA -->
+  <FinalCta />
+
+  <!-- Section 11: Landing Footer -->
+  <Footer />
 
   <!-- Global Command Palette (⌘K) -->
   <CommandPalette client:idle />

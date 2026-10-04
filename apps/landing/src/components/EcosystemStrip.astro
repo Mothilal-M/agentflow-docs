@@ -1,0 +1,109 @@
+---
+// Ecosystem / Provider Marquee Strip
+const providers = [
+  { name: 'Google Gemini', tag: 'Native Provider' },
+  { name: 'Anthropic Claude', tag: 'Native Provider' },
+  { name: 'OpenAI GPT-4o', tag: 'Native Provider' },
+  { name: 'PostgreSQL', tag: 'Cold State Store' },
+  { name: 'Redis', tag: 'Hot Memory Cache' },
+  { name: 'FastAPI', tag: 'Generated API Server' },
+  { name: 'Next.js', tag: 'TypeScript SDK' },
+  { name: 'Docker', tag: 'Container Build' },
+  { name: 'Kubernetes', tag: 'Production Manifests' },
+];
+---
+
+<section class="ecosystem-section">
+  <div class="ecosystem-container">
+    <p class="ecosystem-label">POWERING PRODUCTION AGENTS ACROSS THE MODERN AI ECOSYSTEM</p>
+    
+    <div class="marquee-track">
+      <div class="marquee-content">
+        {providers.concat(providers).map((p) => (
+          <div class="ecosystem-chip">
+            <span class="chip-dot"></span>
+            <span class="chip-name">{p.name}</span>
+            <span class="chip-tag">{p.tag}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ecosystem-section {
+    padding: 3.5rem 0 4rem;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(7, 8, 11, 0.6) 0%, rgba(14, 16, 20, 0.8) 100%);
+    overflow: hidden;
+  }
+  .ecosystem-container {
+    max-width: 1240px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .ecosystem-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.12em;
+    margin-bottom: 2rem;
+  }
+  .marquee-track {
+    display: flex;
+    overflow: hidden;
+    user-select: none;
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  }
+  .marquee-content {
+    display: flex;
+    gap: 1.25rem;
+    animation: marquee 35s linear infinite;
+    min-width: 100%;
+  }
+  .marquee-track:hover .marquee-content {
+    animation-play-state: paused;
+  }
+  .ecosystem-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 1.1rem;
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    white-space: nowrap;
+    transition: var(--transition-fast);
+  }
+  .ecosystem-chip:hover {
+    border-color: rgba(200, 255, 61, 0.4);
+    transform: translateY(-2px);
+  }
+  .chip-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--signal);
+  }
+  .chip-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .chip-tag {
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    background: var(--surface-2);
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+</style>

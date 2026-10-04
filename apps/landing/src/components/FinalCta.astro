@@ -1,0 +1,81 @@
+---
+import { Button, InstallPill, Logo } from '@10xgraph/ui';
+---
+
+<section class="final-cta-section">
+  <div class="final-cta-container">
+    <div class="cta-mark-wrap">
+      <Logo variant="mark" size={80} animated={true} client:visible />
+    </div>
+
+    <h2 class="final-title">Start Building Deterministic Agent Graphs Today</h2>
+    <p class="final-desc">
+      Open-source, self-hosted, MIT licensed. No credit card required, zero proprietary vendor lock-in.
+    </p>
+
+    <div class="final-actions">
+      <a href="https://docs.10xgraph.com/get-started/first-agent" style="text-decoration: none;">
+        <Button size="lg" variant="primary" client:visible>
+          Read The Quick Start Guide →
+        </Button>
+      </a>
+      <a href="https://github.com/10xGraph" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+        <Button size="lg" variant="ghost" client:visible>
+          Star On GitHub
+        </Button>
+      </a>
+    </div>
+
+    <div class="final-install">
+      <InstallPill command="pip install 10xgraph 10xgraph-api" prefix="$" client:visible />
+    </div>
+  </div>
+</section>
+
+<style>
+  .final-cta-section {
+    padding: 8rem 1.5rem;
+    background: radial-gradient(circle at 50% 30%, rgba(200, 255, 61, 0.08) 0%, var(--bg) 70%);
+    border-top: 1px solid var(--border);
+    position: relative;
+    text-align: center;
+  }
+  .final-cta-container {
+    max-width: 820px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .cta-mark-wrap {
+    margin-bottom: 2rem;
+    filter: drop-shadow(0 0 35px rgba(200, 255, 61, 0.4));
+  }
+  .final-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 1.25rem;
+  }
+  .final-desc {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+  }
+  .final-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  .final-install {
+    display: flex;
+    justify-content: center;
+  }
+</style>

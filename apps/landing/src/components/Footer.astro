@@ -1,0 +1,158 @@
+---
+import { Logo } from '@10xgraph/ui';
+const year = new Date().getFullYear();
+---
+
+<footer class="landing-footer">
+  <div class="footer-container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <Logo variant="horizontal" size={34} client:visible />
+        <p class="brand-tagline">
+          The Living Graph: Open-source Python multi-agent state graph runtime with built-in production API server, JWT auth, and replay checkpoints.
+        </p>
+        <div class="status-indicator-wrap">
+          <span class="status-dot"></span>
+          <span>Engine v0.9.2 • Production Ready</span>
+        </div>
+      </div>
+
+      <div class="footer-links-grid">
+        <div class="links-col">
+          <h4>Documentation</h4>
+          <ul>
+            <li><a href="https://docs.10xgraph.com/get-started/installation">Installation</a></li>
+            <li><a href="https://docs.10xgraph.com/get-started/first-agent">First Agent</a></li>
+            <li><a href="https://docs.10xgraph.com/concepts/state-graph">State Graph</a></li>
+            <li><a href="https://docs.10xgraph.com/concepts/memory">Memory &amp; Checkpoints</a></li>
+          </ul>
+        </div>
+
+        <div class="links-col">
+          <h4>Framework</h4>
+          <ul>
+            <li><a href="https://docs.10xgraph.com/compare/agentflow-vs-langgraph">vs. LangGraph</a></li>
+            <li><a href="https://docs.10xgraph.com/compare/agentflow-vs-crewai">vs. CrewAI</a></li>
+            <li><a href="https://docs.10xgraph.com/reference/python">Python Reference</a></li>
+            <li><a href="https://docs.10xgraph.com/reference/client">TypeScript SDK</a></li>
+          </ul>
+        </div>
+
+        <div class="links-col">
+          <h4>Community &amp; Code</h4>
+          <ul>
+            <li><a href="https://github.com/10xGraph" target="_blank" rel="noopener noreferrer">GitHub Org</a></li>
+            <li><a href="https://github.com/10xGraph/10xgraph-docs" target="_blank" rel="noopener noreferrer">Docs Source</a></li>
+            <li><a href="https://docs.10xgraph.com/changelog">Changelog</a></li>
+            <li><a href="https://docs.10xgraph.com/llms.txt">llms.txt (AI Index)</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; {year} 10xScale. 10xGraph is free and open-source software under the MIT License.</p>
+      <p class="footer-formerly">Formerly published as Agentflow.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .landing-footer {
+    padding: 5rem 1.5rem 3rem;
+    background: #040507;
+    border-top: 1px solid var(--border);
+  }
+  .footer-container {
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  @media (min-width: 860px) {
+    .footer-top {
+      grid-template-columns: 1.25fr 2fr;
+    }
+  }
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .brand-tagline {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    max-width: 360px;
+  }
+  .status-indicator-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+  .status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #27c93f;
+    box-shadow: 0 0 8px #27c93f;
+  }
+  .footer-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 2rem;
+  }
+  .links-col h4 {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.25rem;
+  }
+  .links-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .links-col a {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    text-decoration: none;
+    transition: var(--transition-fast);
+  }
+  .links-col a:hover {
+    color: var(--signal);
+  }
+  .footer-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: space-between;
+    padding-top: 2rem;
+    font-size: 0.8rem;
+    color: var(--text-faint);
+  }
+  @media (min-width: 640px) {
+    .footer-bottom {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+  .footer-formerly {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+  }
+</style>

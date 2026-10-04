@@ -1,0 +1,194 @@
+---
+// CompareMatrix: 10xGraph vs. LangGraph vs. CrewAI
+const features = [
+  {
+    feature: 'License',
+    xgraph: 'MIT (100% Free & Open Source)',
+    langgraph: 'MIT (Server is Proprietary Cloud)',
+    crewai: 'MIT (Enterprise Cloud Features)',
+    winner: true,
+  },
+  {
+    feature: 'Production Server Included',
+    xgraph: 'Built-in (FastAPI + JWT + RBAC)',
+    langgraph: 'Requires LangSmith Managed Cloud',
+    crewai: 'Separate CrewAI Enterprise Server',
+    winner: true,
+  },
+  {
+    feature: 'Replay-Safe Tool Ledger',
+    xgraph: 'Native (No double-execution on crash)',
+    langgraph: 'Custom checkpointer implementation',
+    crewai: 'Basic session replay',
+    winner: true,
+  },
+  {
+    feature: 'Framework Dependencies',
+    xgraph: 'Zero (No LangChain dependency)',
+    langgraph: 'Requires langchain-core',
+    crewai: 'Heavy ecosystem dependencies',
+    winner: true,
+  },
+  {
+    feature: 'Two-Tier Memory Architecture',
+    xgraph: 'Redis Hot Cache + Postgres History',
+    langgraph: 'Requires manual store wiring',
+    crewai: 'Chroma / custom vector setup',
+    winner: true,
+  },
+  {
+    feature: 'Deployment Artifacts',
+    xgraph: 'Auto-generated Docker & Kubernetes specs',
+    langgraph: 'Cloud Deployment only',
+    crewai: 'Manual containerization',
+    winner: true,
+  },
+];
+---
+
+<section class="compare-section" id="compare">
+  <div class="compare-container">
+    <div class="compare-header">
+      <span class="compare-tag">ARCHITECTURAL BENCHMARKS</span>
+      <h2 class="compare-title">Why Teams Choose 10xGraph Over Complex Legacy Frameworks</h2>
+      <p class="compare-desc">
+        We believe developer infrastructure should belong to you. No closed server tiers, no proprietary cloud locks, and zero framework bloat.
+      </p>
+    </div>
+
+    <div class="compare-table-wrapper">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th class="th-feature">Capability</th>
+            <th class="th-xgraph">
+              <div class="th-brand">
+                <span class="dot-signal"></span>
+                <span>10xGraph</span>
+              </div>
+            </th>
+            <th class="th-other">LangGraph</th>
+            <th class="th-other">CrewAI</th>
+          </tr>
+        </thead>
+        <tbody>
+          {features.map((row) => (
+            <tr>
+              <td class="td-feature">{row.feature}</td>
+              <td class="td-xgraph">
+                <span class="check-icon">✓</span>
+                <span>{row.xgraph}</span>
+              </td>
+              <td class="td-other">{row.langgraph}</td>
+              <td class="td-other">{row.crewai}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<style>
+  .compare-section {
+    padding: 7rem 1.5rem;
+    background: var(--bg);
+  }
+  .compare-container {
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+  .compare-header {
+    text-align: center;
+    max-width: 780px;
+    margin: 0 auto 4.5rem;
+  }
+  .compare-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--signal);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .compare-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin: 0.75rem 0 1.25rem;
+  }
+  .compare-desc {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+  .compare-table-wrapper {
+    overflow-x: auto;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border);
+    background: var(--surface-1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    min-width: 700px;
+  }
+  .compare-table th {
+    padding: 1.25rem 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-2);
+  }
+  .th-feature { width: 28%; color: var(--text-muted); }
+  .th-xgraph {
+    width: 32%;
+    background: rgba(200, 255, 61, 0.06) !important;
+    border-left: 1px solid rgba(200, 255, 61, 0.2);
+    border-right: 1px solid rgba(200, 255, 61, 0.2);
+  }
+  .th-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--signal);
+    font-size: 0.95rem;
+  }
+  .dot-signal {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--signal);
+    box-shadow: 0 0 8px var(--signal);
+  }
+  .th-other { width: 20%; color: var(--text-muted); }
+  .compare-table td {
+    padding: 1.1rem 1.5rem;
+    font-size: 0.88rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .td-feature {
+    font-weight: 600;
+    color: var(--text);
+  }
+  .td-xgraph {
+    font-weight: 700;
+    color: var(--text);
+    background: rgba(200, 255, 61, 0.03);
+    border-left: 1px solid rgba(200, 255, 61, 0.2);
+    border-right: 1px solid rgba(200, 255, 61, 0.2);
+  }
+  .check-icon {
+    color: var(--signal);
+    font-weight: 900;
+    margin-right: 0.5rem;
+  }
+  .td-other {
+    color: var(--text-muted);
+  }
+</style>

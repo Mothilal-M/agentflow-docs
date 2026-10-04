@@ -1,0 +1,342 @@
+---
+// CodeToProduction: Side-by-side Code -> Graph -> Production Runtime
+---
+
+<section class="c2p-section" id="architecture">
+  <div class="c2p-container">
+    <div class="c2p-header">
+      <span class="c2p-tag">CODE TO PRODUCTION PIPELINE</span>
+      <h2 class="c2p-title">You Write The State Graph. 10xGraph Generates Everything Else.</h2>
+      <p class="c2p-desc">
+        Stop duct-taping API servers, session management, and auth tokens. Define your agent routines once in Python—10xGraph compiles the graph, injects durable checkpoints, and deploys the production FastAPI server.
+      </p>
+    </div>
+
+    <div class="c2p-grid">
+      <!-- Left: Code Editor Window -->
+      <div class="c2p-editor-frame">
+        <div class="c2p-editor-topbar">
+          <div class="editor-dots">
+            <span class="dot-red"></span>
+            <span class="dot-yellow"></span>
+            <span class="dot-green"></span>
+          </div>
+          <span class="editor-filename">agent_graph.py</span>
+          <span class="editor-lang">Python 3.12+</span>
+        </div>
+
+        <pre class="c2p-code"><code><span class="c-kw">from</span> 10xgraph <span class="c-kw">import</span> StateGraph, ReactAgent, tool
+<span class="c-kw">from</span> pydantic <span class="c-kw">import</span> BaseModel
+
+<span class="c-dec">@tool(permissions=["billing:write"])</span>
+<span class="c-kw">async def</span> <span class="c-fn">dispatch_refund</span>(order_id: <span class="c-type">str</span>, amount: <span class="c-type">float</span>) -&gt; <span class="c-type">str</span>:
+    <span class="c-doc">"""Executes refund through payment gateway with ledger replay-safety."""</span>
+    <span class="c-kw">return</span> <span class="c-str">f"Approved refund of &#36;&#123;amount&#125; for order &#123;order_id&#125;"</span>
+
+<span class="c-cmt"># Compile state graph with durable Redis checkpointing</span>
+agent = ReactAgent(
+    model=<span class="c-str">"gemini-2.5-pro"</span>,
+    tools=[dispatch_refund],
+    checkpointer=<span class="c-str">"redis://localhost:6379"</span>,
+    max_steps=10
+)
+
+<span class="c-cmt"># Generates FastAPI server with JWT, owner-only threads & k8s specs</span>
+app = agent.to_production_server()</code></pre>
+      </div>
+
+      <!-- Right: Interactive State Visualizer -->
+      <div class="c2p-graph-frame">
+        <div class="graph-topbar">
+          <div class="graph-status">
+            <span class="status-indicator"></span>
+            <span>COMPILED GRAPH TOPOLOGY</span>
+          </div>
+          <span class="graph-meta">2 Nodes • 3 Edges • Replay-Safe</span>
+        </div>
+
+        <div class="graph-interactive-body">
+          <div class="pipeline-step">
+            <div class="step-badge">INPUT</div>
+            <div class="step-card">
+              <span class="card-name">HTTP / SSE Ingest</span>
+              <span class="card-sub">Bearer JWT • Rate Limit Check</span>
+            </div>
+          </div>
+
+          <div class="pipeline-edge">
+            <div class="edge-packet packet-1"></div>
+          </div>
+
+          <div class="pipeline-step">
+            <div class="step-badge accent-lime">AGENT NODE</div>
+            <div class="step-card active-card">
+              <span class="card-name">LLM Evaluator (Gemini 2.5)</span>
+              <span class="card-sub">Tool Call Generation • Context Window: 1M</span>
+            </div>
+          </div>
+
+          <div class="pipeline-edge">
+            <div class="edge-packet packet-2"></div>
+          </div>
+
+          <div class="pipeline-step">
+            <div class="step-badge accent-amber">CHECKPOINT GATE</div>
+            <div class="step-card checkpoint-card">
+              <span class="card-name">Durable Tool Ledger</span>
+              <span class="card-sub">Skips already-executed payment on resume</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="graph-footer-telemetry">
+          <div class="telemetry-item">
+            <span class="tel-label">State Hash</span>
+            <span class="tel-val">0x8f2a...c4e1</span>
+          </div>
+          <div class="telemetry-item">
+            <span class="tel-label">Step Latency</span>
+            <span class="tel-val">42ms</span>
+          </div>
+          <div class="telemetry-item">
+            <span class="tel-label">Fault Recovery</span>
+            <span class="tel-val text-lime">100% Deterministic</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .c2p-section {
+    padding: 7rem 1.5rem;
+    background: var(--bg);
+    position: relative;
+  }
+  .c2p-container {
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+  .c2p-header {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 4.5rem;
+  }
+  .c2p-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--signal);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .c2p-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin: 0.75rem 0 1.25rem;
+  }
+  .c2p-desc {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+  .c2p-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  @media (min-width: 960px) {
+    .c2p-grid {
+      grid-template-columns: 1.15fr 0.85fr;
+    }
+  }
+
+  /* Editor Frame */
+  .c2p-editor-frame {
+    border-radius: var(--radius-xl);
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  }
+  .c2p-editor-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1.25rem;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--border);
+  }
+  .editor-dots {
+    display: flex;
+    gap: 0.4rem;
+  }
+  .editor-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .dot-red { background: #ff5f56; }
+  .dot-yellow { background: #ffbd2e; }
+  .dot-green { background: #27c93f; }
+  .editor-filename {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text);
+    font-weight: 600;
+  }
+  .editor-lang {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+  .c2p-code {
+    padding: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.86rem;
+    line-height: 1.7;
+    overflow-x: auto;
+    margin: 0;
+  }
+  .c-kw { color: #ff7b72; font-weight: 600; }
+  .c-fn { color: #d2a8ff; font-weight: 600; }
+  .c-dec { color: #79c0ff; }
+  .c-doc { color: #8b949e; font-style: italic; }
+  .c-cmt { color: #8b949e; font-style: italic; }
+  .c-str { color: #a5d6ff; }
+  .c-type { color: #ffa657; }
+
+  /* Graph Frame */
+  .c2p-graph-frame {
+    border-radius: var(--radius-xl);
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  }
+  .graph-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1.25rem;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+  .graph-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text);
+    font-weight: 700;
+  }
+  .status-indicator {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--signal);
+    box-shadow: 0 0 8px var(--signal);
+  }
+  .graph-meta {
+    color: var(--text-muted);
+  }
+  .graph-interactive-body {
+    padding: 2.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .pipeline-step {
+    width: 100%;
+    max-width: 320px;
+  }
+  .step-badge {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.35rem;
+  }
+  .accent-lime { color: var(--signal); }
+  .accent-amber { color: var(--checkpoint); }
+  .step-card {
+    padding: 0.85rem 1.15rem;
+    border-radius: var(--radius-md);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .active-card {
+    border-color: rgba(200, 255, 61, 0.5);
+    background: rgba(200, 255, 61, 0.04);
+  }
+  .checkpoint-card {
+    border-color: rgba(255, 180, 84, 0.4);
+    background: rgba(255, 180, 84, 0.04);
+  }
+  .card-name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .card-sub {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+  .pipeline-edge {
+    width: 2px;
+    height: 28px;
+    background: var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .edge-packet {
+    position: absolute;
+    width: 100%;
+    height: 12px;
+    background: var(--signal);
+    box-shadow: 0 0 8px var(--signal);
+    animation: flow-down 1.8s infinite ease-in-out;
+  }
+  .packet-2 {
+    animation-delay: 0.9s;
+  }
+  @keyframes flow-down {
+    0% { top: -12px; opacity: 0; }
+    50% { opacity: 1; }
+    100% { top: 28px; opacity: 0; }
+  }
+  .graph-footer-telemetry {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 1rem 1.25rem;
+    background: var(--surface-2);
+    border-top: 1px solid var(--border);
+    font-family: var(--font-mono);
+    text-align: center;
+  }
+  .tel-label {
+    display: block;
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    margin-bottom: 0.2rem;
+  }
+  .tel-val {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .text-lime { color: var(--signal); }
+</style>

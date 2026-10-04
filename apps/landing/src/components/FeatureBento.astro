@@ -1,0 +1,423 @@
+---
+// FeatureBento: 6 Core Engineering Superpowers of 10xGraph
+---
+
+<section class="bento-section" id="features">
+  <div class="bento-container">
+    <div class="bento-header">
+      <span class="bento-tag">ENGINEERING FOUNDATIONS</span>
+      <h2 class="bento-title">Built for Systems That Cannot Afford to Hallucinate or Crash</h2>
+      <p class="bento-desc">
+        Every design decision in 10xGraph prioritizes determinism, state recovery, and production isolation over toy demo scripts.
+      </p>
+    </div>
+
+    <div class="bento-grid">
+      <!-- Tile 1: Durable Replay & Ledger (Large) -->
+      <div class="bento-card bento-col-2">
+        <div class="card-visual">
+          <div class="ledger-sim">
+            <div class="ledger-row executed">
+              <span class="ledger-icon">✓</span>
+              <span class="ledger-text">execute_payment(card="*4242", amount=$85)</span>
+              <span class="ledger-status">COMMITTED</span>
+            </div>
+            <div class="ledger-crash-line">
+              <span class="crash-badge">⚡ WORKER CRASH (Process Killed)</span>
+            </div>
+            <div class="ledger-row resume">
+              <span class="ledger-icon text-signal">↻</span>
+              <span class="ledger-text">Resume execution from checkpoint 0x4e2</span>
+              <span class="ledger-status status-skip">SKIPPED (No Double Charge)</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-content">
+          <span class="feature-tag">DURABLE CHECKPOINTING</span>
+          <h3 class="card-title">Replay-Safe Tool Execution</h3>
+          <p class="card-desc">
+            If an agent crashes mid-routine, 10xGraph resumes from the exact state snapshot. A tool call recorded in the ledger is never executed twice.
+          </p>
+        </div>
+      </div>
+
+      <!-- Tile 2: Two-Tier Memory -->
+      <div class="bento-card">
+        <div class="card-visual">
+          <div class="memory-stack">
+            <div class="memory-tier hot">
+              <span class="tier-label">HOT CACHE (Redis)</span>
+              <span class="tier-speed">&lt; 1.2ms latency</span>
+              <span class="tier-sub">Active thread state &amp; checkpoints</span>
+            </div>
+            <div class="memory-tier cold">
+              <span class="tier-label">COLD ARCHIVE (Postgres)</span>
+              <span class="tier-speed">Full telemetry</span>
+              <span class="tier-sub">Auditable history &amp; tool traces</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-content">
+          <span class="feature-tag">HYBRID MEMORY</span>
+          <h3 class="card-title">Two-Tier State Storage</h3>
+          <p class="card-desc">
+            Sub-millisecond prompt context from Redis hot memory paired with PostgreSQL for immutable long-term compliance audits.
+          </p>
+        </div>
+      </div>
+
+      <!-- Tile 3: Per-Tool RBAC -->
+      <div class="bento-card">
+        <div class="card-visual">
+          <div class="rbac-matrix">
+            <div class="rbac-row header">
+              <span>Tool</span>
+              <span>Agent</span>
+              <span>Admin</span>
+            </div>
+            <div class="rbac-row">
+              <span class="tool-name">db_query</span>
+              <span class="check-green">✓</span>
+              <span class="check-green">✓</span>
+            </div>
+            <div class="rbac-row">
+              <span class="tool-name">refund_charge</span>
+              <span class="cross-red">✕</span>
+              <span class="check-green">✓</span>
+            </div>
+            <div class="rbac-row">
+              <span class="tool-name">deploy_prod</span>
+              <span class="cross-red">✕</span>
+              <span class="check-green">✓</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-content">
+          <span class="feature-tag">SECURITY &amp; ACCESS</span>
+          <h3 class="card-title">Per-Tool RBAC &amp; Rate Limits</h3>
+          <p class="card-desc">
+            Annotate sensitive tools with granular permission scopes. Guardrails reject unprivileged tool invocations before the LLM ever executes them.
+          </p>
+        </div>
+      </div>
+
+      <!-- Tile 4: Streaming Telemetry -->
+      <div class="bento-card">
+        <div class="card-visual">
+          <div class="stream-box">
+            <div class="stream-header">
+              <span class="stream-pulse"></span>
+              <span>SSE STREAM (text/event-stream)</span>
+            </div>
+            <div class="stream-chunks">
+              <span class="chunk">event: node_start</span>
+              <span class="chunk">data: &#123;"node": "verifier"&#125;</span>
+              <span class="chunk highlight">token: "Calculating"</span>
+              <span class="chunk highlight">token: " optimal"</span>
+              <span class="chunk highlight">token: " route..."</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-content">
+          <span class="feature-tag">TELEMETRY</span>
+          <h3 class="card-title">Real-Time Event Streaming</h3>
+          <p class="card-desc">
+            Stream tokens, tool inputs, and node lifecycle events over Server-Sent Events (SSE) and WebSockets with zero client buffering.
+          </p>
+        </div>
+      </div>
+
+      <!-- Tile 5: Multi-Agent Handoffs -->
+      <div class="bento-card">
+        <div class="card-visual">
+          <div class="swarm-visual">
+            <div class="swarm-node core">Orchestrator</div>
+            <div class="swarm-branches">
+              <div class="swarm-node sub">Coder</div>
+              <div class="swarm-node sub">Tester</div>
+              <div class="swarm-node sub">Auditor</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-content">
+          <span class="feature-tag">MULTI-AGENT SWARMS</span>
+          <h3 class="card-title">Deterministic Agent Handoffs</h3>
+          <p class="card-desc">
+            Coordinate autonomous agent clusters with typed state contracts. Dynamic routing without cascading prompt degradation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bento-section {
+    padding: 7rem 1.5rem;
+    background: var(--surface-1);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .bento-container {
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+  .bento-header {
+    text-align: center;
+    max-width: 780px;
+    margin: 0 auto 4.5rem;
+  }
+  .bento-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--signal);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .bento-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin: 0.75rem 0 1.25rem;
+  }
+  .bento-desc {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+  .bento-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .bento-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .bento-col-2 {
+      grid-column: span 2;
+    }
+  }
+  @media (min-width: 1080px) {
+    .bento-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .bento-col-2 {
+      grid-column: span 2;
+    }
+  }
+
+  .bento-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform var(--transition-fast), border-color var(--transition-fast);
+  }
+  .bento-card:hover {
+    border-color: rgba(200, 255, 61, 0.4);
+    transform: translateY(-3px);
+  }
+  .card-visual {
+    padding: 2rem;
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--border);
+  }
+  .card-content {
+    padding: 1.75rem;
+  }
+  .feature-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--signal);
+    letter-spacing: 0.08em;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+  .card-title {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+  }
+  .card-desc {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  /* Sim 1: Ledger */
+  .ledger-sim {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+  }
+  .ledger-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.65rem 0.9rem;
+    border-radius: var(--radius-sm);
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+  }
+  .ledger-icon { font-weight: bold; margin-right: 0.5rem; color: #27c93f; }
+  .text-signal { color: var(--signal) !important; }
+  .ledger-status {
+    font-size: 0.68rem;
+    font-weight: bold;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    background: rgba(39, 201, 63, 0.15);
+    color: #27c93f;
+  }
+  .status-skip {
+    background: rgba(200, 255, 61, 0.15);
+    color: var(--signal);
+  }
+  .ledger-crash-line {
+    text-align: center;
+    padding: 0.25rem 0;
+  }
+  .crash-badge {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: var(--danger);
+    background: rgba(255, 107, 107, 0.1);
+    padding: 0.2rem 0.6rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 107, 107, 0.2);
+  }
+
+  /* Sim 2: Memory */
+  .memory-stack {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .memory-tier {
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border);
+  }
+  .memory-tier.hot {
+    background: rgba(94, 230, 240, 0.05);
+    border-color: rgba(94, 230, 240, 0.3);
+  }
+  .memory-tier.cold {
+    background: rgba(255, 255, 255, 0.02);
+  }
+  .tier-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--data-edge);
+  }
+  .tier-speed {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .tier-sub {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+
+  /* Sim 3: RBAC */
+  .rbac-matrix {
+    width: 100%;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+  .rbac-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    padding: 0.4rem 0.6rem;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+  }
+  .rbac-row.header {
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+  .check-green { color: #27c93f; font-weight: bold; }
+  .cross-red { color: var(--danger); font-weight: bold; }
+
+  /* Sim 4: Stream */
+  .stream-box {
+    width: 100%;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem;
+  }
+  .stream-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 800;
+    color: var(--signal);
+    margin-bottom: 0.5rem;
+  }
+  .stream-pulse {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--signal);
+    animation: stream-blink 1s infinite alternate;
+  }
+  @keyframes stream-blink { from { opacity: 0.2; } to { opacity: 1; } }
+  .stream-chunks {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .chunk.highlight { color: #5ee6f0; }
+
+  /* Sim 5: Swarm */
+  .swarm-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.85rem;
+  }
+  .swarm-node {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+  }
+  .swarm-node.core {
+    background: var(--signal);
+    color: var(--signal-text);
+  }
+  .swarm-branches {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .swarm-node.sub {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+</style>
