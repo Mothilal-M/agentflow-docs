@@ -1,5 +1,6 @@
 ---
 // apps/landing/src/pages/index.astro
+import { Logo, Button, InstallPill, GraphCanvas, CommandPalette } from '@10xgraph/ui';
 ---
 
 <!DOCTYPE html>
@@ -7,11 +8,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>10xGraph - State-Graph Execution for Autonomous AI Agents</title>
-  <meta name="description" content="10xGraph coordinates autonomous AI agents across state graphs with checkpointing, time-travel debugging, and multi-LLM telemetry." />
+  <title>10xGraph - The State-Graph Engine for Autonomous AI</title>
+  <meta name="description" content="Orchestrate multi-agent clusters across directed state graphs. Built for deterministic replay, time-travel checkpoints, and sub-millisecond execution telemetry." />
   <link rel="stylesheet" href="/node_modules/@10xgraph/ui/src/tokens.css" />
+  <link rel="stylesheet" href="/node_modules/@10xgraph/ui/src/fonts.css" />
   <style>
     @import "@10xgraph/ui/tokens.css";
+    @import "@10xgraph/ui/fonts.css";
 
     * {
       box-sizing: border-box;
@@ -27,32 +30,74 @@
       min-height: 100vh;
     }
 
+    /* Floating Navbar */
+    .nav-bar {
+      position: fixed;
+      top: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 2rem);
+      max-width: 1080px;
+      height: 3.75rem;
+      border-radius: 9999px;
+      background: rgba(14, 16, 20, 0.75);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: var(--transition-fast);
+    }
+
+    .nav-link:hover {
+      color: var(--text);
+    }
+
+    /* Hero Section */
     .hero-container {
       position: relative;
       width: 100%;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 0 1.5rem;
+      padding: 7rem 1.5rem 4rem;
+      overflow: hidden;
     }
 
-    #hero-canvas {
+    .hero-canvas-wrap {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       z-index: 1;
-      pointer-events: auto;
     }
 
     .hero-content {
       position: relative;
       z-index: 2;
-      max-width: 840px;
+      max-width: 880px;
       pointer-events: none;
     }
 
@@ -60,39 +105,41 @@
       pointer-events: auto;
     }
 
-    .badge {
+    .badge-pill {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
       padding: 0.35rem 0.85rem;
       border-radius: 9999px;
       background: rgba(200, 255, 61, 0.1);
-      border: 1px solid rgba(200, 255, 61, 0.3);
+      border: 1px solid rgba(200, 255, 61, 0.25);
       color: var(--signal);
       font-size: 0.8rem;
       font-weight: 600;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.75rem;
     }
 
     .hero-title {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-family: var(--font-display);
+      font-size: clamp(2.75rem, 6.5vw, 5rem);
       font-weight: 800;
       letter-spacing: -0.035em;
-      line-height: 1.08;
+      line-height: 1.05;
       margin-bottom: 1.5rem;
     }
 
     .hero-title span.accent {
       color: var(--signal);
+      text-shadow: 0 0 35px rgba(200, 255, 61, 0.3);
     }
 
     .hero-desc {
       font-size: 1.15rem;
       line-height: 1.6;
       color: var(--text-muted);
-      max-width: 640px;
+      max-width: 680px;
       margin: 0 auto 2.5rem;
     }
 
@@ -100,80 +147,88 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 1rem;
+      gap: 1.25rem;
       flex-wrap: wrap;
+      margin-bottom: 2.5rem;
     }
 
-    .btn-primary {
-      background: var(--signal);
-      color: var(--signal-text);
-      padding: 0.85rem 1.85rem;
-      border-radius: var(--radius-sm);
-      font-weight: 700;
-      font-size: 0.95rem;
-      text-decoration: none;
-      transition: var(--transition-fast);
-      box-shadow: 0 0 25px rgba(200, 255, 61, 0.25);
-    }
-
-    .btn-primary:hover {
-      background: var(--signal-hover);
-      transform: translateY(-2px);
-    }
-
-    .btn-ghost {
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 0.85rem 1.85rem;
-      border-radius: var(--radius-sm);
-      font-weight: 600;
-      font-size: 0.95rem;
-      text-decoration: none;
-      transition: var(--transition-fast);
-      background: rgba(255, 255, 255, 0.02);
-    }
-
-    .btn-ghost:hover {
-      background: var(--surface-2);
-      border-color: rgba(255, 255, 255, 0.2);
+    .hero-install-wrapper {
+      display: flex;
+      justify-content: center;
     }
   </style>
 </head>
 <body>
+
+  <!-- Floating Nav Bar -->
+  <nav class="nav-bar">
+    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+      <Logo variant="horizontal" size={32} client:load />
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="https://docs.10xgraph.com/concepts" class="nav-link">Concepts</a></li>
+      <li><a href="https://docs.10xgraph.com/tutorials" class="nav-link">Tutorials</a></li>
+      <li><a href="https://docs.10xgraph.com/compare" class="nav-link">Comparisons</a></li>
+      <li><a href="https://docs.10xgraph.com/reference" class="nav-link">API Reference</a></li>
+    </ul>
+
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <a href="https://docs.10xgraph.com" style="text-decoration: none;">
+        <Button size="sm" variant="primary" client:load>
+          Read Docs →
+        </Button>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
   <div class="hero-container bg-grid-graph">
-    <canvas id="hero-canvas"></canvas>
+    <div class="hero-canvas-wrap">
+      <GraphCanvas
+        client:load
+        nodeCount={24}
+        maxDistance={170}
+        theme="dark"
+        interactive={true}
+      />
+    </div>
 
     <div class="hero-content">
-      <div class="badge">
+      <div class="badge-pill">
         <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--signal);"></span>
-        10xGraph Engine v0.1
+        10xGraph v0.1 • Autonomous State-Graph Engine
       </div>
+
       <h1 class="hero-title">
-        The State-Graph Engine for <span class="accent">Autonomous AI</span>
+        The Living Graph for <span class="accent">Autonomous AI</span>
       </h1>
+
       <p class="hero-desc">
         Orchestrate multi-agent clusters across directed state graphs. Built for deterministic replay, time-travel checkpoints, and sub-millisecond execution telemetry.
       </p>
+
       <div class="hero-actions">
-        <a href="https://docs.10xgraph.com" class="btn-primary">Explore Documentation →</a>
-        <a href="https://github.com/10xGraph" class="btn-ghost">View on GitHub</a>
+        <a href="https://docs.10xgraph.com/get-started/first-agent" style="text-decoration: none;">
+          <Button size="lg" variant="primary" client:load>
+            Start Building Free →
+          </Button>
+        </a>
+        <a href="https://github.com/10xGraph" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+          <Button size="lg" variant="ghost" client:load>
+            GitHub (10xGraph)
+          </Button>
+        </a>
+      </div>
+
+      <div class="hero-install-wrapper">
+        <InstallPill command="pip install 10xgraph" prefix="$" client:load />
       </div>
     </div>
   </div>
 
-  <script>
-    import { GraphEngine } from '@10xgraph/ui';
+  <!-- Global Command Palette (⌘K) -->
+  <CommandPalette client:idle />
 
-    const canvas = document.getElementById('hero-canvas');
-    if (canvas instanceof HTMLCanvasElement) {
-      const engine = new GraphEngine(canvas, {
-        nodeCount: 22,
-        maxDistance: 170,
-        interactive: true,
-        theme: 'dark'
-      });
-      engine.init();
-    }
-  </script>
 </body>
 </html>

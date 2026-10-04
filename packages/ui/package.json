@@ -5,13 +5,30 @@
   "type": "module",
   "exports": {
     "./tokens.css": "./src/tokens.css",
+    "./fonts.css": "./src/fonts.css",
     "./canvas": "./src/canvas/graph-engine.ts",
     ".": "./src/index.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit"
   },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  },
   "devDependencies": {
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "typescript": "^5.9.3"
   }
 }

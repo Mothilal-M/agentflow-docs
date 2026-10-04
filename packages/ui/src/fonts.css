@@ -1,0 +1,65 @@
+/* ==========================================================================
+   10xGraph Typography Font Faces (packages/ui/src/fonts.css)
+   Satoshi (Display) + Geist (Body) + Geist Mono (Code/Telemetry)
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Satoshi';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Satoshi Bold'), local('Satoshi-Bold'),
+       url('https://cdn.fontshare.com/wf/TTX2Z3BFWC4PBWNUWZNUSSQ63F5PFNCG/A7WVOQE52R2LXVIPDJAPMQW2UASF42VU/U5AODD6NJ7U4Q7F6G7L7H2Z7QCVF4EJA.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: local('Satoshi Black'), local('Satoshi-Black'),
+       url('https://cdn.fontshare.com/wf/DHYSZLQDF4GOU7T2L2R2GXZS4XU46467/2C22E2Q3H5O66R5U6M5GZ3G2F7C77Y6M/Z5V6G7L7H2Z7QCVF4EJA7WVOQE52R2LX.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Geist Regular'), local('Geist-Regular'),
+       local('-apple-system'), local('BlinkMacSystemFont'), local('Segoe UI');
+}
+
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local('Geist Medium'), local('Geist-Medium'),
+       local('-apple-system'), local('BlinkMacSystemFont'), local('Segoe UI');
+}
+
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Geist SemiBold'), local('Geist-SemiBold'),
+       local('-apple-system'), local('BlinkMacSystemFont'), local('Segoe UI');
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Geist Mono'), local('GeistMono-Regular'), local('JetBrains Mono'), local('ui-monospace'), monospace;
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Geist Mono Bold'), local('GeistMono-Bold'), local('JetBrains Mono Bold'), local('ui-monospace'), monospace;
+}
