@@ -1,0 +1,142 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  nodeCount?: number;
+  height?: string;
+}
+
+const {
+  title = 'Interactive State-Graph Execution',
+  description = 'Live simulation of agent nodes, directed data channels, and checkpoint saves.',
+  nodeCount = 14,
+  height = '320px',
+} = Astro.props;
+
+const diagramId = `graph-diagram-${Math.random().toString(36).substring(2, 9)}`;
+---
+
+<div class="graph-diagram-container" style={`--diagram-height: ${height};`}>
+  <div class="graph-diagram-header">
+    <div class="graph-diagram-meta">
+      <div class="graph-diagram-dot"></div>
+      <h4 class="graph-diagram-title">{title}</h4>
+    </div>
+    <span class="graph-diagram-badge">LIVE SIMULATION</span>
+  </div>
+
+  <div class="graph-diagram-viewport">
+    <canvas id={diagramId} class="graph-diagram-canvas"></canvas>
+    <div class="graph-diagram-hint">Hover to attract nodes • Checkpoints in amber</div>
+  </div>
+
+  {description && <p class="graph-diagram-desc">{description}</p>}
+</div>
+
+<script define:vars={{ diagramId, nodeCount }}>
+  import { GraphEngine } from '@10xgraph/ui';
+
+  const canvas = document.getElementById(diagramId);
+  if (canvas instanceof HTMLCanvasElement) {
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    const engine = new GraphEngine(canvas, {
+      nodeCount: nodeCount,
+      maxDistance: 150,
+      interactive: true,
+      theme: isLight ? 'light' : 'dark',
+    });
+    engine.init();
+
+    // Listen for theme changes to adapt canvas colors
+    const observer = new MutationObserver(() => {
+      const updatedLight = document.documentElement.getAttribute('data-theme') === 'light';
+      engine.destroy();
+      const updatedEngine = new GraphEngine(canvas, {
+        nodeCount: nodeCount,
+        maxDistance: 150,
+        interactive: true,
+        theme: updatedLight ? 'light' : 'dark',
+      });
+      updatedEngine.init();
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  }
+</script>
+
+<style>
+  .graph-diagram-container {
+    margin: 2rem 0;
+    border-radius: 12px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+  .graph-diagram-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.25rem;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface-2);
+  }
+  .graph-diagram-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .graph-diagram-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+  }
+  .graph-diagram-title {
+    margin: 0;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text);
+    font-family: var(--f-display);
+  }
+  .graph-diagram-badge {
+    font-size: 0.65rem;
+    font-family: var(--f-mono);
+    font-weight: 700;
+    color: var(--accent);
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    background: var(--accent-wash);
+    border: 1px solid var(--accent-line);
+    letter-spacing: 0.05em;
+  }
+  .graph-diagram-viewport {
+    position: relative;
+    width: 100%;
+    height: var(--diagram-height, 320px);
+    background: var(--bg);
+  }
+  .graph-diagram-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .graph-diagram-hint {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.75rem;
+    font-size: 0.7rem;
+    font-family: var(--f-mono);
+    color: var(--muted);
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  .graph-diagram-desc {
+    margin: 0;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.5;
+    border-top: 1px solid var(--line);
+  }
+</style>

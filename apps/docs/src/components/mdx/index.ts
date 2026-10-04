@@ -7,5 +7,15 @@ import LinkCard from './LinkCard.astro';
 import Steps from './Steps.astro';
 import TabItem from './TabItem.astro';
 import Tabs from './Tabs.astro';
+import GraphDiagram from './GraphDiagram.astro';
 
-export const mdxComponents = { Callout, CardGrid, FileTree, LinkCard, Steps, TabItem, Tabs };
+export const mdxComponents = {
+  Callout,
+  CardGrid,
+  FileTree,
+  LinkCard,
+  Steps,
+  TabItem,
+  Tabs,
+  GraphDiagram,
+};

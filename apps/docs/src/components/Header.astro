@@ -8,18 +8,98 @@ const isCurrent = (href: string) => href.startsWith('/') && (path === href || pa
 ---
 <header class="site-header">
   <div class="wrap header-row">
-    <a class="wordmark" href="/" aria-label="10xGraph home">10xGraph</a>
-    <a class="version-pill" href="/changelog" title={`Current release: v${SITE.version}. Read the changelog`}>v{SITE.version}</a>
+    <a class="wordmark brand-link" href="/" aria-label="10xGraph Documentation Home">
+      <svg width="26" height="26" viewBox="0 0 200 200" fill="none" class="brand-mark-svg" aria-hidden="true">
+        <circle cx="100" cy="100" r="76" stroke="#c8ff3d" stroke-width="2" stroke-dasharray="4 6" opacity="0.4" />
+        <line x1="45" y1="45" x2="100" y2="100" stroke="#5ee6f0" stroke-width="5" stroke-linecap="round" />
+        <line x1="100" y1="100" x2="155" y2="155" stroke="#c8ff3d" stroke-width="5" stroke-linecap="round" />
+        <line x1="155" y1="45" x2="100" y2="100" stroke="#5ee6f0" stroke-width="5" stroke-linecap="round" />
+        <line x1="100" y1="100" x2="45" y2="155" stroke="#c8ff3d" stroke-width="5" stroke-linecap="round" />
+        <circle cx="45" cy="45" r="12" fill="var(--bg)" stroke="#5ee6f0" stroke-width="3" />
+        <circle cx="45" cy="45" r="5" fill="#5ee6f0" />
+        <circle cx="155" cy="45" r="12" fill="var(--bg)" stroke="#5ee6f0" stroke-width="3" />
+        <circle cx="155" cy="45" r="5" fill="#5ee6f0" />
+        <circle cx="45" cy="155" r="12" fill="var(--bg)" stroke="#5ee6f0" stroke-width="3" />
+        <circle cx="45" cy="155" r="5" fill="#5ee6f0" />
+        <circle cx="155" cy="155" r="12" fill="var(--bg)" stroke="#5ee6f0" stroke-width="3" />
+        <circle cx="155" cy="155" r="5" fill="#5ee6f0" />
+        <circle cx="100" cy="100" r="18" fill="var(--bg)" stroke="#c8ff3d" stroke-width="4" />
+        <circle cx="100" cy="100" r="7" fill="#c8ff3d" />
+      </svg>
+      <span class="brand-title">10<span class="brand-accent">x</span>Graph</span>
+      <span class="brand-badge">DOCS</span>
+    </a>
+    
+    <a class="version-pill" href="/changelog" title={`Current release: v${SITE.version}. Read the changelog`}>
+      v{SITE.version}
+    </a>
+
     <nav aria-label="Primary">
       <ul>
+        <li>
+          <a href="https://10xgraph.com" target="_blank" rel="noopener noreferrer" class="ext-link">
+            Landing ↗
+          </a>
+        </li>
         {NAV.map((item) => (
           <li>
             <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
           </li>
         ))}
+        <li>
+          <a href="https://github.com/10xGraph" target="_blank" rel="noopener noreferrer" class="ext-link">
+            GitHub ↗
+          </a>
+        </li>
       </ul>
     </nav>
+
     <SearchDialog />
     <ThemeToggle />
   </div>
 </header>
+
+<style>
+  .brand-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 800;
+  }
+  .brand-mark-svg {
+    display: inline-block;
+    flex-shrink: 0;
+    transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .brand-link:hover .brand-mark-svg {
+    transform: scale(1.08) rotate(5deg);
+  }
+  .brand-title {
+    font-family: var(--f-display);
+    font-size: 1.15rem;
+    letter-spacing: -0.02em;
+  }
+  .brand-accent {
+    color: var(--accent);
+  }
+  .brand-badge {
+    font-family: var(--f-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    background: var(--accent-wash);
+    color: var(--accent);
+    border: 1px solid var(--accent-line);
+    letter-spacing: 0.05em;
+  }
+  .ext-link {
+    opacity: 0.75;
+  }
+  .ext-link:hover {
+    opacity: 1;
+    color: var(--accent) !important;
+  }
+</style>
