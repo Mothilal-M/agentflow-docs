@@ -1,11 +1,11 @@
 ---
 // apps/landing/src/pages/index.astro
 import { FloatingDockNav } from '../components/FloatingDockNav';
-import { InteractiveGraphStudio } from '../components/InteractiveGraphStudio';
+import { TactileGraphStudio } from '../components/TactileGraphStudio';
 import { CrashReplayShowcase } from '../components/CrashReplayShowcase';
 import { FrameworkCodeCompare } from '../components/FrameworkCodeCompare';
 import EcosystemStrip from '../components/EcosystemStrip.astro';
-import FeatureBento from '../components/FeatureBento.astro';
+import { TactileFeatureBento } from '../components/TactileFeatureBento';
 import FinalCta from '../components/FinalCta.astro';
 import Footer from '../components/Footer.astro';
 import { CommandPalette } from '@10xgraph/ui';
@@ -286,7 +286,7 @@ import { CommandPalette } from '@10xgraph/ui';
 
       <!-- THE LIVING GRAPH STUDIO CENTERPIECE -->
       <div class="hero-studio-stage" id="interactive-studio">
-        <InteractiveGraphStudio client:load />
+        <TactileGraphStudio client:load />
       </div>
 
     </div>
@@ -300,8 +300,23 @@ import { CommandPalette } from '@10xgraph/ui';
     <CrashReplayShowcase client:load />
   </section>
 
-  <!-- SECTION 3: FEATURE BENTO (WITH MOUSE SPOTLIGHT) -->
-  <FeatureBento />
+  <!-- SECTION 3: TACTILE FEATURE BENTO (WITH 3D HARDWARE ASSETS) -->
+  <section style="padding: 7rem 0; background: #060a12;" id="features">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem 3rem; text-align: center;">
+      <div class="eyebrow-pill" style="background: rgba(0, 91, 230, 0.15); color: #93c5fd; border-color: rgba(0, 91, 230, 0.3);">
+        <span>✦</span>
+        <span>ENGINEERED ARCHITECTURE</span>
+        <span>✦</span>
+      </div>
+      <h2 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; color: #ffffff; letter-spacing: -0.03em; margin-bottom: 1rem;">
+        Everything Production Needs. Built-in.
+      </h2>
+      <p style="font-size: 1.1rem; color: #94a3b8; max-width: 650px; margin: 0 auto;">
+        No closed-source managed clouds. No custom glue code. 10xGraph compiles your state graphs into hardened production systems.
+      </p>
+    </div>
+    <TactileFeatureBento client:load />
+  </section>
 
   <!-- SECTION 4: FRAMEWORK CODE BENCHMARK (LINE-BY-LINE) -->
   <section style="padding: 7rem 0; background: #f8fafc; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;" id="code-compare">
@@ -382,17 +397,27 @@ import { CommandPalette } from '@10xgraph/ui';
           '-=0.5'
         );
 
-      // Bento cards scroll trigger
-      gsap.from('.bento-card', {
+      // Tactile nodes entrance animation
+      gsap.from('.tactile-node-card', {
+        y: 30,
+        opacity: 0,
+        stagger: 0.12,
+        duration: 0.8,
+        ease: 'power3.out',
+        delay: 0.8,
+      });
+
+      // Bento tiles scroll trigger
+      gsap.from('.bento-tile', {
         scrollTrigger: {
-          trigger: '.bento-grid',
+          trigger: '.tactile-bento-grid',
           start: 'top 85%',
         },
         y: 40,
         opacity: 0,
-        stagger: 0.1,
-        duration: 0.7,
-        ease: 'power2.out',
+        stagger: 0.15,
+        duration: 0.8,
+        ease: 'power3.out',
       });
     });
   </script>
