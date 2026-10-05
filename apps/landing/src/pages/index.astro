@@ -26,10 +26,14 @@ import { CommandPalette } from '@10xgraph/ui';
     :root {
       --primary: #005be6;
       --primary-hover: #1e40af;
-      --primary-wash: #dfecff;
-      --bg: #ffffff;
-      --text: #0d0d0d;
-      --text-muted: #64748b;
+      --primary-glow: rgba(0, 91, 230, 0.4);
+      --bg: #030712;
+      --bg-card: #080d1a;
+      --bg-card-hover: #0d1527;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(0, 91, 230, 0.4);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
       --font-display: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
     }
@@ -50,19 +54,20 @@ import { CommandPalette } from '@10xgraph/ui';
       position: relative;
     }
 
-    /* Ambient Lighting */
-    .ambient-glow-layer {
-      position: absolute;
+    /* Interactive Cursor Spotlight Layer */
+    .cursor-spotlight-layer {
+      position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      height: 800px;
+      bottom: 0;
       pointer-events: none;
-      z-index: 0;
-      background: radial-gradient(1200px 600px at 50% -50px, rgba(0, 91, 230, 0.14), rgba(223, 236, 255, 0.45) 45%, transparent 80%);
+      z-index: 1;
+      background: radial-gradient(750px circle at var(--mouse-x, 50%) var(--mouse-y, 30%), rgba(0, 91, 230, 0.12), transparent 50%);
     }
 
-    .tech-grid-pattern {
+    /* Ambient Lighting */
+    .ambient-glow-layer {
       position: absolute;
       top: 0;
       left: 0;
@@ -70,8 +75,19 @@ import { CommandPalette } from '@10xgraph/ui';
       height: 900px;
       pointer-events: none;
       z-index: 0;
-      background-image: linear-gradient(to right, rgba(0, 91, 230, 0.04) 1px, transparent 1px),
-                        linear-gradient(to bottom, rgba(0, 91, 230, 0.04) 1px, transparent 1px);
+      background: radial-gradient(1200px 600px at 50% -50px, rgba(0, 91, 230, 0.22), rgba(2, 132, 199, 0.08) 55%, transparent 80%);
+    }
+
+    .tech-grid-pattern {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1100px;
+      pointer-events: none;
+      z-index: 0;
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
       background-size: 36px 36px;
       mask-image: radial-gradient(ellipse 90% 70% at 50% 25%, black 20%, transparent 80%);
       -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 25%, black 20%, transparent 80%);
@@ -81,7 +97,7 @@ import { CommandPalette } from '@10xgraph/ui';
     .hero-cinematic-section {
       position: relative;
       z-index: 10;
-      padding: 7.5rem 1.5rem 5rem;
+      padding: 8rem 1.5rem 5.5rem;
       text-align: center;
     }
     .hero-cinematic-container {
@@ -98,30 +114,30 @@ import { CommandPalette } from '@10xgraph/ui';
       gap: 0.6rem;
       padding: 0.4rem 1.1rem;
       border-radius: 9999px;
-      background: #ffffff;
-      border: 1px solid rgba(0, 91, 230, 0.25);
-      color: var(--primary);
+      background: rgba(0, 91, 230, 0.12);
+      border: 1px solid rgba(0, 91, 230, 0.35);
+      color: #93c5fd;
       font-size: 0.76rem;
       font-family: var(--font-mono);
       font-weight: 800;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      box-shadow: 0 4px 15px rgba(0, 91, 230, 0.08);
+      box-shadow: 0 4px 20px rgba(0, 91, 230, 0.15);
       margin-bottom: 2rem;
     }
 
     .hero-cinematic-title {
-      font-size: clamp(2.75rem, 6vw, 4.5rem);
+      font-size: clamp(2.75rem, 6vw, 4.75rem);
       font-weight: 900;
       letter-spacing: -0.04em;
       line-height: 1.08;
-      color: #0f172a;
+      color: #ffffff;
       margin-bottom: 1.5rem;
       max-width: 950px;
     }
 
     .gradient-text {
-      background: linear-gradient(135deg, #005be6 0%, #1e40af 50%, #0284c7 100%);
+      background: linear-gradient(135deg, #38bdf8 0%, #005be6 50%, #60a5fa 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: inline-block;
@@ -130,7 +146,7 @@ import { CommandPalette } from '@10xgraph/ui';
     .hero-cinematic-lead {
       font-size: 1.18rem;
       line-height: 1.65;
-      color: var(--text-muted);
+      color: #94a3b8;
       max-width: 680px;
       margin-bottom: 2.25rem;
     }
@@ -146,14 +162,14 @@ import { CommandPalette } from '@10xgraph/ui';
     }
 
     .btn-hero-glow {
-      padding: 0.9rem 2rem;
+      padding: 0.95rem 2.25rem;
       border-radius: 14px;
       background: var(--primary);
       color: #ffffff;
       font-size: 1rem;
       font-weight: 700;
       text-decoration: none;
-      box-shadow: 0 6px 20px rgba(0, 91, 230, 0.35);
+      box-shadow: 0 6px 25px rgba(0, 91, 230, 0.45);
       transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
       display: inline-flex;
       align-items: center;
@@ -161,26 +177,26 @@ import { CommandPalette } from '@10xgraph/ui';
     }
     .btn-hero-glow:hover {
       background: var(--primary-hover);
-      box-shadow: 0 10px 30px rgba(0, 91, 230, 0.45);
+      box-shadow: 0 10px 35px rgba(0, 91, 230, 0.6);
       transform: translateY(-2px);
     }
 
     .btn-hero-ghost {
-      padding: 0.9rem 1.75rem;
+      padding: 0.95rem 2rem;
       border-radius: 14px;
-      background: #ffffff;
-      border: 1px solid #cbd5e1;
-      color: #334155;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #f1f5f9;
       font-size: 1rem;
       font-weight: 600;
       text-decoration: none;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
       transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .btn-hero-ghost:hover {
-      background: #f8fafc;
-      border-color: #94a3b8;
-      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
     }
 
     /* Quick Trust Metrics */
@@ -189,22 +205,27 @@ import { CommandPalette } from '@10xgraph/ui';
       flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-      gap: 2rem;
+      gap: 1.25rem;
       font-family: var(--font-mono);
       font-size: 0.78rem;
-      color: #475569;
+      color: #cbd5e1;
       margin-bottom: 3.5rem;
     }
     .trust-metric-item {
       display: inline-flex;
       align-items: center;
-      gap: 0.45rem;
+      gap: 0.5rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
     .trust-dot {
       width: 7px;
       height: 7px;
       border-radius: 50%;
       background: #10b981;
+      box-shadow: 0 0 8px #10b981;
     }
 
     /* Living Studio Sandbox Wrapper */
@@ -213,21 +234,12 @@ import { CommandPalette } from '@10xgraph/ui';
       max-width: 1100px;
       margin: 0 auto;
     }
-
-    /* Keyframe Animations */
-    @keyframes pulseCrash {
-      0% { opacity: 0.2; }
-      100% { opacity: 0.6; }
-    }
-    @keyframes packetFlow {
-      0% { offset-distance: 0%; opacity: 0; }
-      20% { opacity: 1; }
-      80% { opacity: 1; }
-      100% { offset-distance: 100%; opacity: 0; }
-    }
   </style>
 </head>
 <body>
+
+  <!-- INTERACTIVE MOUSE SPOTLIGHT -->
+  <div class="cursor-spotlight-layer"></div>
 
   <!-- AMBIENT LIGHTING -->
   <div class="ambient-glow-layer"></div>
@@ -296,12 +308,12 @@ import { CommandPalette } from '@10xgraph/ui';
   <EcosystemStrip />
 
   <!-- SECTION 2: CRASH REPLAY PROOF ("KILL THE DOUBLE CHARGE") -->
-  <section style="padding: 7rem 0; background: #ffffff;" id="failure-mode">
+  <section style="padding: 7rem 0; background: #050814; border-top: 1px solid rgba(255, 255, 255, 0.06); border-bottom: 1px solid rgba(255, 255, 255, 0.06);" id="failure-mode">
     <CrashReplayShowcase client:load />
   </section>
 
   <!-- SECTION 3: TACTILE FEATURE BENTO (WITH 3D HARDWARE ASSETS) -->
-  <section style="padding: 7rem 0; background: #060a12;" id="features">
+  <section style="padding: 7rem 0; background: #030712;" id="features">
     <div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem 3rem; text-align: center;">
       <div class="eyebrow-pill" style="background: rgba(0, 91, 230, 0.15); color: #93c5fd; border-color: rgba(0, 91, 230, 0.3);">
         <span>✦</span>
@@ -319,7 +331,7 @@ import { CommandPalette } from '@10xgraph/ui';
   </section>
 
   <!-- SECTION 4: FRAMEWORK CODE BENCHMARK (LINE-BY-LINE) -->
-  <section style="padding: 7rem 0; background: #f8fafc; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;" id="code-compare">
+  <section style="padding: 7rem 0; background: #050814; border-top: 1px solid rgba(255, 255, 255, 0.06); border-bottom: 1px solid rgba(255, 255, 255, 0.06);" id="code-compare">
     <FrameworkCodeCompare client:load />
   </section>
 
@@ -340,6 +352,12 @@ import { CommandPalette } from '@10xgraph/ui';
     gsap.registerPlugin(ScrollTrigger);
 
     window.addEventListener('DOMContentLoaded', () => {
+      // Mouse Spotlight tracker
+      window.addEventListener('mousemove', (e) => {
+        document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+        document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+      });
+
       // Hero Entrance Timeline
       const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 

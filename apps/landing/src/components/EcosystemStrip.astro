@@ -4,8 +4,8 @@ const providers = [
   { name: 'Google Gemini', tag: 'Native LLM' },
   { name: 'Anthropic Claude', tag: 'Native LLM' },
   { name: 'OpenAI GPT-4o', tag: 'Native LLM' },
-  { name: 'FastAPI', tag: 'Compiled API Server' },
-  { name: 'Redis', tag: 'Hot Memory Cache' },
+  { name: 'FastAPI', tag: 'Compiled Server' },
+  { name: 'Redis', tag: 'Hot Memory <0.8ms' },
   { name: 'PostgreSQL', tag: 'Cold State Store' },
   { name: 'Docker', tag: 'Container Build' },
   { name: 'Kubernetes', tag: 'Production Specs' },
@@ -32,11 +32,12 @@ const providers = [
 
 <style>
   .ecosystem-section {
-    padding: 3rem 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    background: #f8fafc;
+    padding: 3.5rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: #040813;
     overflow: hidden;
+    position: relative;
   }
   .ecosystem-container {
     max-width: 1200px;
@@ -44,10 +45,10 @@ const providers = [
     text-align: center;
   }
   .ecosystem-label {
-    font-family: var(--font-mono);
+    font-family: var(--font-mono, monospace);
     font-size: 0.72rem;
     font-weight: 700;
-    color: var(--text-muted);
+    color: #64748b;
     letter-spacing: 0.12em;
     margin-bottom: 1.5rem;
   }
@@ -72,36 +73,39 @@ const providers = [
     align-items: center;
     gap: 0.6rem;
     padding: 0.55rem 1.1rem;
-    background: #ffffff;
-    border: 1px solid var(--border);
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 9999px;
     white-space: nowrap;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-    transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .ecosystem-chip:hover {
     border-color: #005be6;
-    box-shadow: 0 4px 12px rgba(0, 91, 230, 0.12);
+    background: rgba(0, 91, 230, 0.12);
+    box-shadow: 0 6px 20px rgba(0, 91, 230, 0.25);
     transform: translateY(-2px);
   }
   .chip-dot {
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #005be6;
+    background: #38bdf8;
+    box-shadow: 0 0 8px #38bdf8;
   }
   .chip-name {
     font-size: 0.85rem;
     font-weight: 600;
-    color: #0d0d0d;
+    color: #f1f5f9;
   }
   .chip-tag {
     font-size: 0.7rem;
-    font-family: var(--font-mono);
-    color: var(--text-muted);
-    padding: 0.1rem 0.4rem;
-    background: #f1f5f9;
-    border-radius: 4px;
+    font-family: var(--font-mono, monospace);
+    color: #93c5fd;
+    padding: 0.15rem 0.45rem;
+    background: rgba(0, 91, 230, 0.15);
+    border-radius: 6px;
+    border: 1px solid rgba(0, 91, 230, 0.25);
   }
 
   @keyframes marquee {

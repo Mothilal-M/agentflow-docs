@@ -1,3 +1,4 @@
+// apps/landing/src/components/FrameworkCodeCompare.tsx
 import React, { useState } from 'react';
 
 export const FrameworkCodeCompare: React.FC = () => {
@@ -100,7 +101,7 @@ crew = Crew(
   const current = frameworks[selectedFramework];
 
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
+    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem', fontFamily: 'var(--font-display, -apple-system, sans-serif)' }}>
       
       {/* Section Header */}
       <div style={{ textAlign: 'center', maxWidth: '760px', margin: '0 auto 3rem' }}>
@@ -111,9 +112,10 @@ crew = Crew(
             gap: '0.5rem',
             padding: '0.35rem 0.85rem',
             borderRadius: '9999px',
-            background: '#dfecff',
-            color: '#005be6',
-            fontFamily: "'JetBrains Mono', monospace",
+            background: 'rgba(0, 91, 230, 0.12)',
+            border: '1px solid rgba(0, 91, 230, 0.3)',
+            color: '#93c5fd',
+            fontFamily: "var(--font-mono, monospace)",
             fontSize: '0.72rem',
             fontWeight: 800,
             letterSpacing: '0.06em',
@@ -123,15 +125,15 @@ crew = Crew(
         >
           <span>DEVELOPER ERGONOMICS &amp; BENCHMARKS</span>
         </div>
-        <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.03em', lineHeight: 1.2, marginBottom: '1rem' }}>
+        <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.85rem)', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.03em', lineHeight: 1.15, marginBottom: '1rem' }}>
           Cleaner Code. Faster Runtimes. Zero Framework Bloat.
         </h2>
-        <p style={{ fontSize: '1.05rem', color: '#64748b', lineHeight: 1.6 }}>
+        <p style={{ fontSize: '1.05rem', color: '#94a3b8', lineHeight: 1.6 }}>
           Compare real production implementations side-by-side. 10xGraph eliminates hundreds of lines of glue code and proprietary cloud dependencies.
         </p>
 
         {/* Framework Selector Tabs */}
-        <div style={{ display: 'inline-flex', gap: '0.5rem', background: '#f1f5f9', padding: '0.35rem', borderRadius: '14px', marginTop: '1.5rem' }}>
+        <div style={{ display: 'inline-flex', gap: '0.4rem', background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '0.35rem', borderRadius: '14px', marginTop: '1.5rem' }}>
           {(['10xgraph', 'langgraph', 'crewai'] as const).map((fw) => {
             const isSel = selectedFramework === fw;
             return (
@@ -139,17 +141,17 @@ crew = Crew(
                 key={fw}
                 onClick={() => setSelectedFramework(fw)}
                 style={{
-                  padding: '0.5rem 1.2rem',
+                  padding: '0.55rem 1.3rem',
                   borderRadius: '10px',
                   border: 'none',
-                  background: isSel ? '#ffffff' : 'transparent',
-                  color: isSel ? '#005be6' : '#64748b',
-                  fontFamily: 'Inter, sans-serif',
+                  background: isSel ? '#005be6' : 'transparent',
+                  color: isSel ? '#ffffff' : '#94a3b8',
+                  fontFamily: 'var(--font-display, sans-serif)',
                   fontWeight: 700,
                   fontSize: '0.82rem',
                   cursor: 'pointer',
-                  boxShadow: isSel ? '0 2px 8px rgba(0, 0, 0, 0.08)' : 'none',
-                  transition: 'all 0.15s ease',
+                  boxShadow: isSel ? '0 4px 15px rgba(0, 91, 230, 0.4)' : 'none',
+                  transition: 'all 0.2s ease',
                 }}
               >
                 {frameworks[fw].name} {fw === '10xgraph' && '✦'}
@@ -163,9 +165,9 @@ crew = Crew(
       <div
         style={{
           borderRadius: '20px',
-          background: '#0f172a',
-          border: '1px solid #334155',
-          boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.3)',
+          background: '#070b14',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(0, 91, 230, 0.15)',
           overflow: 'hidden',
         }}
       >
@@ -177,8 +179,8 @@ crew = Crew(
             alignItems: 'center',
             justifyContent: 'space-between',
             padding: '0.85rem 1.5rem',
-            background: '#1e293b',
-            borderBottom: '1px solid #334155',
+            background: '#0d1527',
+            borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
             gap: '1rem',
           }}
         >
@@ -186,15 +188,15 @@ crew = Crew(
             <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ff5f56', display: 'inline-block' }} />
             <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ffbd2e', display: 'inline-block' }} />
             <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#27c93f', display: 'inline-block' }} />
-            <span style={{ marginLeft: '0.75rem', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.75rem', color: '#94a3b8' }}>
+            <span style={{ marginLeft: '0.75rem', fontFamily: "var(--font-mono, monospace)", fontSize: '0.75rem', color: '#94a3b8' }}>
               {selectedFramework === '10xgraph' ? 'agent_service.py (Production Ready)' : 'legacy_boilerplate.py'}
             </span>
           </div>
 
           {/* Quick Metrics Bar */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.72rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', fontFamily: "var(--font-mono, monospace)", fontSize: '0.72rem' }}>
             <span style={{ color: '#94a3b8' }}>Lines: <strong style={{ color: selectedFramework === '10xgraph' ? '#38bdf8' : '#f87171' }}>{current.lines}</strong></span>
-            <span style={{ color: '#94a3b8' }}>Dependencies: <strong style={{ color: selectedFramework === '10xgraph' ? '#4ade80' : '#f87171' }}>{current.deps}</strong></span>
+            <span style={{ color: '#94a3b8' }}>Dependencies: <strong style={{ color: selectedFramework === '10xgraph' ? '#34d399' : '#f87171' }}>{current.deps}</strong></span>
             <span style={{ color: '#94a3b8' }}>Server: <strong style={{ color: selectedFramework === '10xgraph' ? '#38bdf8' : '#fbbf24' }}>{current.server}</strong></span>
           </div>
         </div>
@@ -204,12 +206,12 @@ crew = Crew(
           style={{
             padding: '1.75rem',
             margin: 0,
-            fontFamily: "'JetBrains Mono', monospace",
+            fontFamily: "var(--font-mono, monospace)",
             fontSize: '0.88rem',
             lineHeight: 1.7,
             color: '#e2e8f0',
             overflowX: 'auto',
-            background: '#0f172a',
+            background: '#070b14',
           }}
         >
           <code>{current.code}</code>
