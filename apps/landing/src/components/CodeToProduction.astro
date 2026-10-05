@@ -5,7 +5,10 @@
 <section class="c2p-section" id="how-it-works">
   <div class="c2p-container">
     <div class="c2p-header">
-      <span class="c2p-tag">CODE TO PRODUCTION PIPELINE</span>
+      <div class="c2p-badge">
+        <span class="c2p-badge-dot"></span>
+        <span>CODE TO PRODUCTION PIPELINE</span>
+      </div>
       <h2 class="c2p-title">You Write The State Graph. 10xGraph Generates Everything Else.</h2>
       <p class="c2p-desc">
         Stop duct-taping API servers, session management, and auth tokens. Define your agent routines once in Python—10xGraph compiles the graph, injects durable checkpoints, and deploys the production FastAPI server.
@@ -13,7 +16,7 @@
     </div>
 
     <div class="c2p-grid">
-      <!-- Left: Code Editor Window -->
+      <!-- Left: Interactive Code Editor Window -->
       <div class="c2p-editor-frame">
         <div class="c2p-editor-topbar">
           <div class="editor-dots">
@@ -21,16 +24,23 @@
             <span class="dot-yellow"></span>
             <span class="dot-green"></span>
           </div>
-          <span class="editor-filename">agent_graph.py</span>
+          
+          <div class="editor-tabs">
+            <button class="editor-tab active" data-tab="react">agent_graph.py</button>
+            <button class="editor-tab" data-tab="swarm">swarm_router.py</button>
+            <button class="editor-tab" data-tab="server">server_api.py</button>
+          </div>
+
           <span class="editor-lang">Python 3.12+</span>
         </div>
 
-        <pre class="c2p-code"><code><span class="c-kw">from</span> 10xgraph <span class="c-kw">import</span> StateGraph, ReactAgent, tool
+        <!-- Tab 1: ReactAgent -->
+        <pre class="c2p-code code-tab" id="code-react"><code><span class="c-kw">from</span> 10xgraph <span class="c-kw">import</span> StateGraph, ReactAgent, tool
 <span class="c-kw">from</span> pydantic <span class="c-kw">import</span> BaseModel
 
 <span class="c-dec">@tool(permissions=["billing:write"])</span>
 <span class="c-kw">async def</span> <span class="c-fn">dispatch_refund</span>(order_id: <span class="c-type">str</span>, amount: <span class="c-type">float</span>) -&gt; <span class="c-type">str</span>:
-    <span class="c-doc">"""Executes refund through payment gateway with ledger replay-safety."""</span>
+    <span class="c-doc">"""Executes refund through gateway with ledger replay-safety."""</span>
     <span class="c-kw">return</span> <span class="c-str">f"Approved refund of &#36;&#123;amount&#125; for order &#123;order_id&#125;"</span>
 
 <span class="c-cmt"># Compile state graph with durable Redis checkpointing</span>
@@ -41,8 +51,40 @@ agent = ReactAgent(
     max_steps=10
 )
 
-<span class="c-cmt"># Generates FastAPI server with JWT, owner-only threads &amp; k8s specs</span>
+<span class="c-cmt"># Generates FastAPI server with JWT &amp; Docker/k8s specs</span>
 app = agent.to_production_server()</code></pre>
+
+        <!-- Tab 2: Swarm Router -->
+        <pre class="c2p-code code-tab" id="code-swarm" style="display: none;"><code><span class="c-kw">from</span> 10xgraph <span class="c-kw">import</span> SwarmCluster, AgentNode
+
+<span class="c-cmt"># Define specialist nodes with typed state contracts</span>
+router = AgentNode(name=<span class="c-str">"router"</span>, model=<span class="c-str">"gemini-2.5-flash"</span>)
+analyst = AgentNode(name=<span class="c-str">"analyst"</span>, model=<span class="c-str">"gemini-2.5-pro"</span>, tools=[calc_risk])
+auditor = AgentNode(name=<span class="c-str">"auditor"</span>, model=<span class="c-str">"claude-3-5-sonnet"</span>)
+
+<span class="c-cmt"># Assemble autonomous swarm with deterministic handoffs</span>
+swarm = SwarmCluster()
+swarm.add_edge(router, analyst, condition=<span class="c-str">"requires_deep_calc"</span>)
+swarm.add_edge(analyst, auditor, condition=<span class="c-str">"verify_compliance"</span>)
+
+<span class="c-cmt"># Deploy swarm cluster with durable state replay</span>
+app = swarm.to_production_server(port=8000)</code></pre>
+
+        <!-- Tab 3: Server API -->
+        <pre class="c2p-code code-tab" id="code-server" style="display: none;"><code><span class="c-kw">import</span> uvicorn
+<span class="c-kw">from</span> 10xgraph.server <span class="c-kw">import</span> create_agent_service
+
+<span class="c-cmt"># Auto-generates REST, SSE streams, JWT validation and metrics</span>
+service = create_agent_service(
+    agent_graph=agent,
+    jwt_secret=<span class="c-str">"env:JWT_SECRET_KEY"</span>,
+    rate_limit=<span class="c-str">"120/minute"</span>,
+    enable_sse_stream=<span class="c-kw">True</span>
+)
+
+<span class="c-kw">if</span> __name__ == <span class="c-str">"__main__"</span>:
+    <span class="c-cmt"># Ready for Kubernetes horizontal pod autoscaling</span>
+    uvicorn.run(service, host=<span class="c-str">"0.0.0.0"</span>, port=8000)</code></pre>
       </div>
 
       <!-- Right: Interactive State Visualizer -->
@@ -108,9 +150,31 @@ app = agent.to_production_server()</code></pre>
   </div>
 </section>
 
+<script>
+  // Tab switching logic for code editor
+  const tabs = document.querySelectorAll('.editor-tab');
+  const codePanes = document.querySelectorAll('.code-tab');
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach((t) => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      const target = (tab as HTMLElement).dataset.tab;
+      codePanes.forEach((pane) => {
+        if (pane.id === `code-${target}`) {
+          (pane as HTMLElement).style.display = 'block';
+        } else {
+          (pane as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
 <style>
   .c2p-section {
-    padding: 6rem 1.5rem;
+    padding: 7rem 1.5rem;
     background: #f8fafc;
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
@@ -123,22 +187,30 @@ app = agent.to_production_server()</code></pre>
   .c2p-header {
     text-align: center;
     max-width: 760px;
-    margin: 0 auto 4rem;
+    margin: 0 auto 4.5rem;
   }
-  .c2p-tag {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
+  .c2p-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
     font-weight: 800;
     color: #005be6;
     letter-spacing: 0.1em;
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
+    padding: 0.35rem 0.85rem;
     background: #dfecff;
     border-radius: 9999px;
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
+  }
+  .c2p-badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #005be6;
   }
   .c2p-title {
-    font-family: var(--font-display);
+    font-family: 'Inter', -apple-system, sans-serif;
     font-size: clamp(2rem, 4vw, 2.75rem);
     font-weight: 800;
     letter-spacing: -0.025em;
@@ -164,17 +236,17 @@ app = agent.to_production_server()</code></pre>
 
   /* Editor Frame */
   .c2p-editor-frame {
-    border-radius: var(--radius-lg);
-    background: #0f172a; /* Slate 900 for high-contrast code readability */
+    border-radius: 18px;
+    background: #0f172a;
     border: 1px solid #334155;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
   }
   .c2p-editor-topbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.85rem 1.25rem;
+    padding: 0.75rem 1.25rem;
     background: #1e293b;
     border-bottom: 1px solid #334155;
   }
@@ -190,20 +262,43 @@ app = agent.to_production_server()</code></pre>
   .dot-red { background: #ff5f56; }
   .dot-yellow { background: #ffbd2e; }
   .dot-green { background: #27c93f; }
-  .editor-filename {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: #e2e8f0;
-    font-weight: 600;
+
+  .editor-tabs {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: #0f172a;
+    padding: 0.2rem;
+    border-radius: 8px;
   }
-  .editor-lang {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
+  .editor-tab {
+    padding: 0.25rem 0.65rem;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
     color: #94a3b8;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .editor-tab.active {
+    background: #1e293b;
+    color: #38bdf8;
+  }
+  .editor-tab:hover {
+    color: #ffffff;
+  }
+
+  .editor-lang {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: #64748b;
   }
   .c2p-code {
     padding: 1.5rem;
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.86rem;
     line-height: 1.7;
     overflow-x: auto;
@@ -220,7 +315,7 @@ app = agent.to_production_server()</code></pre>
 
   /* Graph Frame */
   .c2p-graph-frame {
-    border-radius: var(--radius-lg);
+    border-radius: 18px;
     background: #ffffff;
     border: 1px solid var(--border);
     display: flex;
@@ -236,7 +331,7 @@ app = agent.to_production_server()</code></pre>
     padding: 0.85rem 1.25rem;
     background: #f8fafc;
     border-bottom: 1px solid var(--border);
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.75rem;
   }
   .graph-status {
@@ -268,7 +363,7 @@ app = agent.to_production_server()</code></pre>
     max-width: 320px;
   }
   .step-badge {
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.65rem;
     font-weight: 800;
     color: var(--text-muted);
@@ -279,7 +374,7 @@ app = agent.to_production_server()</code></pre>
   .accent-green { color: #3eaf3f; }
   .step-card {
     padding: 0.85rem 1.15rem;
-    border-radius: var(--radius-md);
+    border-radius: 12px;
     background: #ffffff;
     border: 1px solid var(--border);
     display: flex;
@@ -333,7 +428,7 @@ app = agent.to_production_server()</code></pre>
     padding: 1rem 1.25rem;
     background: #f8fafc;
     border-top: 1px solid var(--border);
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', monospace;
     text-align: center;
   }
   .tel-label {
