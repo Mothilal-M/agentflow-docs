@@ -1,5 +1,5 @@
 ---
-import { Logo } from '@10xgraph/ui';
+// apps/landing/src/components/Footer.astro
 const year = new Date().getFullYear();
 ---
 
@@ -7,7 +7,14 @@ const year = new Date().getFullYear();
   <div class="footer-container">
     <div class="footer-top">
       <div class="footer-brand">
-        <Logo variant="horizontal" size={34} client:visible />
+        <a href="/" class="brand-link">
+          <img
+            src="/logo/10xgraph-logo-3d.png"
+            alt="10xGraph"
+            height="32"
+            class="brand-logo"
+          />
+        </a>
         <p class="brand-tagline">
           The Living Graph: Open-source Python multi-agent state graph runtime with built-in production API server, JWT auth, and replay checkpoints.
         </p>
@@ -60,11 +67,11 @@ const year = new Date().getFullYear();
 <style>
   .landing-footer {
     padding: 5rem 1.5rem 3rem;
-    background: #040507;
+    background: #f8fafc;
     border-top: 1px solid var(--border);
   }
   .footer-container {
-    max-width: 1240px;
+    max-width: 1200px;
     margin: 0 auto;
   }
   .footer-top {
@@ -84,6 +91,10 @@ const year = new Date().getFullYear();
     flex-direction: column;
     gap: 1.25rem;
   }
+  .brand-logo {
+    height: 32px;
+    object-contain: fit;
+  }
   .brand-tagline {
     font-size: 0.9rem;
     line-height: 1.6;
@@ -99,24 +110,23 @@ const year = new Date().getFullYear();
     color: var(--text-muted);
   }
   .status-dot {
-    width: 7px;
-    height: 7px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
-    background: #27c93f;
-    box-shadow: 0 0 8px #27c93f;
+    background: #3eaf3f;
   }
   .footer-links-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 2.5rem;
   }
   .links-col h4 {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
+    font-family: var(--font-display);
+    font-size: 0.85rem;
     font-weight: 700;
-    color: var(--text);
+    color: #0d0d0d;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.05em;
     margin-bottom: 1.25rem;
   }
   .links-col ul {
@@ -125,34 +135,34 @@ const year = new Date().getFullYear();
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.85rem;
   }
   .links-col a {
     color: var(--text-muted);
     font-size: 0.88rem;
     text-decoration: none;
-    transition: var(--transition-fast);
+    transition: color 0.15s ease;
   }
   .links-col a:hover {
-    color: var(--signal);
+    color: #005be6;
   }
   .footer-bottom {
+    padding-top: 2.5rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    align-items: center;
     justify-content: space-between;
-    padding-top: 2rem;
     font-size: 0.8rem;
-    color: var(--text-faint);
+    color: var(--text-muted);
   }
   @media (min-width: 640px) {
     .footer-bottom {
       flex-direction: row;
-      align-items: center;
     }
   }
   .footer-formerly {
     font-family: var(--font-mono);
-    font-size: 0.72rem;
+    font-size: 0.75rem;
   }
 </style>

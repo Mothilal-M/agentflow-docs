@@ -1,21 +1,20 @@
 ---
-// Ecosystem / Provider Marquee Strip
+// apps/landing/src/components/EcosystemStrip.astro
 const providers = [
-  { name: 'Google Gemini', tag: 'Native Provider' },
-  { name: 'Anthropic Claude', tag: 'Native Provider' },
-  { name: 'OpenAI GPT-4o', tag: 'Native Provider' },
-  { name: 'PostgreSQL', tag: 'Cold State Store' },
+  { name: 'Google Gemini', tag: 'Native LLM' },
+  { name: 'Anthropic Claude', tag: 'Native LLM' },
+  { name: 'OpenAI GPT-4o', tag: 'Native LLM' },
+  { name: 'FastAPI', tag: 'Compiled API Server' },
   { name: 'Redis', tag: 'Hot Memory Cache' },
-  { name: 'FastAPI', tag: 'Generated API Server' },
-  { name: 'Next.js', tag: 'TypeScript SDK' },
+  { name: 'PostgreSQL', tag: 'Cold State Store' },
   { name: 'Docker', tag: 'Container Build' },
-  { name: 'Kubernetes', tag: 'Production Manifests' },
+  { name: 'Kubernetes', tag: 'Production Specs' },
 ];
 ---
 
 <section class="ecosystem-section">
   <div class="ecosystem-container">
-    <p class="ecosystem-label">POWERING PRODUCTION AGENTS ACROSS THE MODERN AI ECOSYSTEM</p>
+    <p class="ecosystem-label">NATIVELY COMPATIBLE WITH THE MODERN PRODUCTION STACK</p>
     
     <div class="marquee-track">
       <div class="marquee-content">
@@ -33,14 +32,14 @@ const providers = [
 
 <style>
   .ecosystem-section {
-    padding: 3.5rem 0 4rem;
+    padding: 3rem 0;
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
-    background: linear-gradient(180deg, rgba(7, 8, 11, 0.6) 0%, rgba(14, 16, 20, 0.8) 100%);
+    background: #f8fafc;
     overflow: hidden;
   }
   .ecosystem-container {
-    max-width: 1240px;
+    max-width: 1200px;
     margin: 0 auto;
     text-align: center;
   }
@@ -50,7 +49,7 @@ const providers = [
     font-weight: 700;
     color: var(--text-muted);
     letter-spacing: 0.12em;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
   }
   .marquee-track {
     display: flex;
@@ -72,36 +71,39 @@ const providers = [
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
-    padding: 0.6rem 1.1rem;
-    background: var(--surface-1);
+    padding: 0.55rem 1.1rem;
+    background: #ffffff;
     border: 1px solid var(--border);
     border-radius: 9999px;
     white-space: nowrap;
-    transition: var(--transition-fast);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .ecosystem-chip:hover {
-    border-color: rgba(200, 255, 61, 0.4);
+    border-color: #005be6;
+    box-shadow: 0 4px 12px rgba(0, 91, 230, 0.12);
     transform: translateY(-2px);
   }
   .chip-dot {
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--signal);
+    background: #005be6;
   }
   .chip-name {
     font-size: 0.85rem;
     font-weight: 600;
-    color: var(--text);
+    color: #0d0d0d;
   }
   .chip-tag {
     font-size: 0.7rem;
     font-family: var(--font-mono);
     color: var(--text-muted);
-    padding: 0.15rem 0.4rem;
+    padding: 0.1rem 0.4rem;
+    background: #f1f5f9;
     border-radius: 4px;
-    background: var(--surface-2);
   }
+
   @keyframes marquee {
     0% { transform: translateX(0%); }
     100% { transform: translateX(-50%); }

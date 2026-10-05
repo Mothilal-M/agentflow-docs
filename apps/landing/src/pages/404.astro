@@ -1,5 +1,6 @@
 ---
-import { Logo, Button } from '@10xgraph/ui';
+// apps/landing/src/pages/404.astro
+import { Button } from '@10xgraph/ui';
 ---
 
 <!DOCTYPE html>
@@ -8,16 +9,15 @@ import { Logo, Button } from '@10xgraph/ui';
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>404 - State Disconnected | 10xGraph</title>
-  <link rel="stylesheet" href="/node_modules/@10xgraph/ui/src/tokens.css" />
-  <link rel="stylesheet" href="/node_modules/@10xgraph/ui/src/fonts.css" />
+  <link rel="icon" type="image/jpeg" href="/logo/10xgraph-icon-badge.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
   <style>
-    @import "@10xgraph/ui/tokens.css";
-    @import "@10xgraph/ui/fonts.css";
-
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-body);
+      background: #ffffff;
+      color: #0d0d0d;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -31,26 +31,26 @@ import { Logo, Button } from '@10xgraph/ui';
       max-width: 600px;
     }
     .nf-tag {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--danger);
-      background: rgba(255, 107, 107, 0.1);
-      border: 1px solid rgba(255, 107, 107, 0.25);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #e14942;
+      background: #fef2f2;
+      border: 1px solid rgba(225, 73, 66, 0.25);
       padding: 0.35rem 0.85rem;
       border-radius: 9999px;
       display: inline-block;
       margin-bottom: 1.5rem;
     }
     .nf-title {
-      font-family: var(--font-display);
-      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
       font-weight: 800;
       letter-spacing: -0.035em;
       margin-bottom: 1rem;
     }
     .nf-desc {
-      font-size: 1.1rem;
-      color: var(--text-muted);
+      font-size: 1.05rem;
+      color: #6b7280;
       line-height: 1.6;
       margin-bottom: 2.5rem;
     }
@@ -59,15 +59,26 @@ import { Logo, Button } from '@10xgraph/ui';
       justify-content: center;
       gap: 1rem;
     }
+    .nf-badge-img {
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      box-shadow: 0 10px 25px rgba(0, 91, 230, 0.15);
+      margin-bottom: 2rem;
+    }
   </style>
 </head>
-<body class="bg-grid-graph">
+<body>
   <div class="nf-container">
-    <div style="margin-bottom: 2rem;">
-      <Logo variant="mark" size={64} client:load />
-    </div>
+    <img
+      src="/logo/10xgraph-icon-badge.jpg"
+      alt="10xGraph Icon"
+      class="nf-badge-img"
+    />
 
-    <span class="nf-tag">ERROR 404 • UNRESOLVED STATE NODE</span>
+    <div>
+      <span class="nf-tag">ERROR 404 • UNRESOLVED STATE NODE</span>
+    </div>
     <h1 class="nf-title">This Route Leads Nowhere</h1>
     <p class="nf-desc">
       The state machine encountered an unmapped transition or dead edge. Return to the homepage or explore documentation.
@@ -78,7 +89,7 @@ import { Logo, Button } from '@10xgraph/ui';
         <Button size="md" variant="primary" client:load>Return Home →</Button>
       </a>
       <a href="https://docs.10xgraph.com" style="text-decoration: none;">
-        <Button size="md" variant="ghost" client:load>Documentation</Button>
+        <Button size="md" variant="outline" client:load>Documentation</Button>
       </a>
     </div>
   </div>

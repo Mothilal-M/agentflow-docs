@@ -137,10 +137,10 @@ export class GraphEngine {
     const isDark = this.options.theme === 'dark';
 
     const colors = {
-      core: isDark ? '#c8ff3d' : '#2f6b12',
-      checkpoint: isDark ? '#ffb454' : '#9a5b00',
-      edgeData: isDark ? '#5ee6f0' : '#0e7c86',
-      agent: isDark ? '#eceae3' : '#0c0e12',
+      core: isDark ? '#3b82f6' : '#005be6',
+      checkpoint: isDark ? '#4ade80' : '#3eaf3f',
+      edgeData: isDark ? '#60a5fa' : '#005be6',
+      agent: isDark ? '#f9fafb' : '#0d0d0d',
     };
 
     for (let i = 0; i < count; i++) {
@@ -188,8 +188,8 @@ export class GraphEngine {
   public spawnPackets(count: number = 1) {
     if (this.edges.length === 0) return;
     const isDark = this.options.theme === 'dark';
-    const primaryColor = isDark ? '#c8ff3d' : '#2f6b12';
-    const secondaryColor = isDark ? '#5ee6f0' : '#0e7c86';
+    const primaryColor = isDark ? '#3b82f6' : '#005be6';
+    const secondaryColor = isDark ? '#60a5fa' : '#0284c7';
 
     for (let k = 0; k < count; k++) {
       const edge = this.edges[Math.floor(Math.random() * this.edges.length)];
@@ -312,7 +312,7 @@ export class GraphEngine {
         this.ctx.beginPath();
         this.ctx.moveTo(n1.x, n1.y);
         this.ctx.lineTo(n2.x, n2.y);
-        this.ctx.strokeStyle = isDark ? `rgba(94, 230, 240, ${alpha})` : `rgba(14, 124, 134, ${alpha})`;
+        this.ctx.strokeStyle = isDark ? `rgba(96, 165, 250, ${alpha})` : `rgba(0, 91, 230, ${alpha})`;
         this.ctx.lineWidth = 1;
         this.ctx.stroke();
       }

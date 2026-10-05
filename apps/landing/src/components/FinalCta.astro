@@ -1,11 +1,18 @@
 ---
-import { Button, InstallPill, Logo } from '@10xgraph/ui';
+// apps/landing/src/components/FinalCta.astro
+import { Button, InstallPill } from '@10xgraph/ui';
 ---
 
 <section class="final-cta-section">
   <div class="final-cta-container">
     <div class="cta-mark-wrap">
-      <Logo variant="mark" size={80} animated={true} client:visible />
+      <img
+        src="/logo/10xgraph-icon-badge.jpg"
+        alt="10xGraph Icon Badge"
+        width="72"
+        height="72"
+        class="cta-icon-badge"
+      />
     </div>
 
     <h2 class="final-title">Start Building Deterministic Agent Graphs Today</h2>
@@ -20,8 +27,8 @@ import { Button, InstallPill, Logo } from '@10xgraph/ui';
         </Button>
       </a>
       <a href="https://github.com/10xGraph" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
-        <Button size="lg" variant="ghost" client:visible>
-          Star On GitHub
+        <Button size="lg" variant="outline" client:visible>
+          Star On GitHub ★
         </Button>
       </a>
     </div>
@@ -34,8 +41,8 @@ import { Button, InstallPill, Logo } from '@10xgraph/ui';
 
 <style>
   .final-cta-section {
-    padding: 8rem 1.5rem;
-    background: radial-gradient(circle at 50% 30%, rgba(200, 255, 61, 0.08) 0%, var(--bg) 70%);
+    padding: 7rem 1.5rem;
+    background: #ffffff;
     border-top: 1px solid var(--border);
     position: relative;
     text-align: center;
@@ -49,14 +56,18 @@ import { Button, InstallPill, Logo } from '@10xgraph/ui';
   }
   .cta-mark-wrap {
     margin-bottom: 2rem;
-    filter: drop-shadow(0 0 35px rgba(200, 255, 61, 0.4));
+  }
+  .cta-icon-badge {
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0, 91, 230, 0.15);
   }
   .final-title {
     font-family: var(--font-display);
-    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
     font-weight: 800;
     letter-spacing: -0.03em;
-    line-height: 1.1;
+    line-height: 1.15;
+    color: #0d0d0d;
     margin-bottom: 1.25rem;
   }
   .final-desc {

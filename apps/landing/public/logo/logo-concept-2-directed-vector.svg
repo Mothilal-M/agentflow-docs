@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%" fill="none">
+  <defs>
+    <filter id="glow-lime-2" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <linearGradient id="vector-grad" x1="30" y1="160" x2="170" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#5EE6F0"/>
+      <stop offset="70%" stop-color="#C8FF3D"/>
+      <stop offset="100%" stop-color="#FFFFFF"/>
+    </linearGradient>
+    <linearGradient id="rail-grad" x1="50" y1="35" x2="50" y2="165" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#C8FF3D"/>
+      <stop offset="100%" stop-color="#5EE6F0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- The "1" Pipeline: Vertical telemetry bus with top hook -->
+  <path d="M 38 60 L 52 46 L 52 154" stroke="url(#rail-grad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Pipeline Checkpoint Nodes on "1" -->
+  <circle cx="52" cy="46" r="6" fill="#07080B" stroke="#C8FF3D" stroke-width="2"/>
+  <circle cx="52" cy="100" r="4" fill="#C8FF3D" filter="url(#glow-lime-2)"/>
+  <circle cx="52" cy="154" r="6" fill="#07080B" stroke="#5EE6F0" stroke-width="2"/>
+
+  <!-- The "0" Orbit Ring: Elliptical / circular state cycle -->
+  <circle cx="130" cy="100" r="44" stroke="#5EE6F0" stroke-width="3" stroke-opacity="0.25" stroke-dasharray="6 6"/>
+  <circle cx="130" cy="100" r="34" stroke="#5EE6F0" stroke-width="4" stroke-opacity="0.8"/>
+
+  <!-- Nodes orbiting the "0" loop -->
+  <circle cx="130" cy="66" r="5" fill="#5EE6F0"/>
+  <circle cx="164" cy="100" r="5" fill="#5EE6F0"/>
+  <circle cx="130" cy="134" r="5" fill="#5EE6F0"/>
+
+  <!-- The "X" Accelerator: Directed diagonal hyper-edge shooting up & right -->
+  <line x1="72" y1="158" x2="168" y2="42" stroke="url(#vector-grad)" stroke-width="6" stroke-linecap="round"/>
+  
+  <!-- Counter diagonal tick creating the "X" cross -->
+  <line x1="88" y1="70" x2="152" y2="130" stroke="#C8FF3D" stroke-width="4" stroke-linecap="round" stroke-opacity="0.9"/>
+
+  <!-- Luminous focal nodes on the intersection -->
+  <circle cx="120" cy="100" r="9" fill="#07080B" stroke="#C8FF3D" stroke-width="2.5"/>
+  <circle cx="120" cy="100" r="4.5" fill="#C8FF3D" filter="url(#glow-lime-2)"/>
+
+  <!-- Terminal Arrowhead Vector -->
+  <polygon points="168,42 154,42 168,56" fill="#C8FF3D" filter="url(#glow-lime-2)"/>
+</svg>

@@ -1,50 +1,49 @@
-/* 10xGraph design tokens. Dark is the brand default; light is a full theme, not an inversion.
-   The theme is set on <html data-theme> by the inline script in BaseLayout. Without JS, the
-   :root values (dark) apply, and the media query below serves light-preferring visitors. */
+/* 10xGraph design tokens - hire10x White & Blue Theme.
+   Light mode is the default brand theme with #005BE6 cobalt blue; dark mode provides high-contrast developer night reading. */
 :root,
-[data-theme='dark'] {
-  color-scheme: dark;
-  --bg: #07080b;
-  --surface: #0e1014;
-  --surface-2: #151820;
-  --line: rgba(255, 255, 255, 0.08);
-  --line-2: rgba(255, 255, 255, 0.14);
-  --text: #eceae3;
-  --sub: #c6ceda;
-  --muted: #8d9199;
-  --faint: #525660;
-  --accent: #c8ff3d;
-  --accent-wash: rgba(200, 255, 61, 0.12);
-  --accent-line: rgba(200, 255, 61, 0.35);
-  --btn: #c8ff3d;
-  --btn-hover: #d6ff66;
-  --btn-ink: #07080b;
-  --tip: #5ee6f0;
-  --warn: #ffb454;
-  --danger: #ff6b6b;
-  --code-bg: #0e1014;
-}
 [data-theme='light'] {
   color-scheme: light;
-  --bg: #f6f5f0;
+  --bg: #ffffff;
   --surface: #ffffff;
-  --surface-2: #efede6;
-  --line: rgba(12, 14, 18, 0.08);
-  --line-2: rgba(12, 14, 18, 0.14);
-  --text: #0c0e12;
-  --sub: #2c3440;
-  --muted: #5b5f66;
-  --faint: #8d9199;
-  --accent: #2f6b12;
-  --accent-wash: rgba(47, 107, 18, 0.1);
-  --accent-line: rgba(47, 107, 18, 0.25);
-  --btn: #2f6b12;
-  --btn-hover: #26570e;
+  --surface-2: #f8fafc;
+  --line: #e2e8f0;
+  --line-2: #cbd5e1;
+  --text: #0d0d0d;
+  --sub: #334155;
+  --muted: #64748b;
+  --faint: #94a3b8;
+  --accent: #005be6;
+  --accent-wash: #dfecff;
+  --accent-line: rgba(0, 91, 230, 0.25);
+  --btn: #005be6;
+  --btn-hover: #1e40af;
   --btn-ink: #ffffff;
-  --tip: #0e7c86;
-  --warn: #9a5b00;
-  --danger: #b4232c;
-  --code-bg: #efede6;
+  --tip: #005be6;
+  --warn: #ff9e0d;
+  --danger: #e14942;
+  --code-bg: #f8fafc;
+}
+[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0b0f17;
+  --surface: #111827;
+  --surface-2: #1f2937;
+  --line: rgba(255, 255, 255, 0.1);
+  --line-2: rgba(255, 255, 255, 0.16);
+  --text: #f9fafb;
+  --sub: #cbd5e1;
+  --muted: #94a3b8;
+  --faint: #64748b;
+  --accent: #3b82f6;
+  --accent-wash: rgba(59, 130, 246, 0.15);
+  --accent-line: rgba(59, 130, 246, 0.35);
+  --btn: #3b82f6;
+  --btn-hover: #60a5fa;
+  --btn-ink: #ffffff;
+  --tip: #60a5fa;
+  --warn: #fbbf24;
+  --danger: #f87171;
+  --code-bg: #111827;
 }
 @media (prefers-color-scheme: light) {
   :root:not([data-theme]) {

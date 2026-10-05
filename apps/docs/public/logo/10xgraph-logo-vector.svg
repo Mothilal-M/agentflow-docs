@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 340" width="100%" height="100%" fill="none">
+  <defs>
+    <!-- Drop Shadow Filter for 3D Depth -->
+    <filter id="shadow-3d" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="3" dy="10" stdDeviation="8" flood-color="#000000" flood-opacity="0.25"/>
+      <feDropShadow dx="1" dy="3" stdDeviation="2" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+
+    <!-- Bevel & Emboss Filter -->
+    <filter id="metallic-bevel" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feSpecularLighting in="blur" surfaceScale="3" specularConstant="1.2" specularExponent="20" lighting-color="#FFFFFF" result="specular">
+        <fePointLight x="150" y="50" z="200"/>
+      </feSpecularLighting>
+      <feComposite in="SourceGraphic" in2="specular" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
+    </filter>
+
+    <!-- Metallic Steel Navy Gradient for "10" -->
+    <linearGradient id="steel-blue-body" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2D5580"/>
+      <stop offset="25%" stop-color="#203E60"/>
+      <stop offset="70%" stop-color="#182E47"/>
+      <stop offset="100%" stop-color="#0F1F31"/>
+    </linearGradient>
+
+    <!-- 3D Side/Extrusion Gradient for "10" -->
+    <linearGradient id="steel-blue-side" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E3957"/>
+      <stop offset="100%" stop-color="#0A1624"/>
+    </linearGradient>
+
+    <!-- Chrome Silver Gradient for "Graph" and Rim of "X" -->
+    <linearGradient id="silver-chrome-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="25%" stop-color="#DDE3EA"/>
+      <stop offset="60%" stop-color="#9EABB8"/>
+      <stop offset="85%" stop-color="#CED7E0"/>
+      <stop offset="100%" stop-color="#7B8896"/>
+    </linearGradient>
+
+    <linearGradient id="silver-body" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F2F5F8"/>
+      <stop offset="30%" stop-color="#D5DCE4"/>
+      <stop offset="70%" stop-color="#A6B3C0"/>
+      <stop offset="100%" stop-color="#808F9F"/>
+    </linearGradient>
+
+    <!-- Mesh Lattice Pattern for "X" Interior -->
+    <pattern id="mesh-grid" width="8" height="8" patternUnits="userSpaceOnUse">
+      <rect width="8" height="8" fill="#1C2127"/>
+      <path d="M0 0 L8 8 M8 0 L0 8" stroke="#3D4752" stroke-width="1.2"/>
+      <path d="M0 4 L4 8 M4 0 L8 4 M4 0 L0 4 M8 4 L4 8" stroke="#5E6B78" stroke-width="0.75" opacity="0.6"/>
+      <circle cx="4" cy="4" r="0.75" fill="#8E9AA7" opacity="0.7"/>
+    </pattern>
+  </defs>
+
+  <g filter="url(#shadow-3d)" transform="translate(10, 20)">
+
+    <!-- ==================== "1" ==================== -->
+    <!-- 3D Extrusion Shadow/Sides -->
+    <path d="M 64 88 L 102 88 L 102 248 L 74 248 L 74 136 L 42 152 L 28 126 Z" fill="url(#steel-blue-side)"/>
+    <path d="M 42 120 L 74 98 L 94 98 L 94 242 L 68 242 L 68 136 L 36 150 Z" fill="url(#steel-blue-body)" stroke="#4A75A5" stroke-width="2.5" stroke-linejoin="round"/>
+
+    <!-- ==================== "0" ==================== -->
+    <!-- Outer 3D Extrusion -->
+    <ellipse cx="184" cy="174" rx="55" ry="78" fill="url(#steel-blue-side)"/>
+    <!-- Outer Face -->
+    <ellipse cx="180" cy="170" rx="54" ry="76" fill="url(#steel-blue-body)" stroke="#4A75A5" stroke-width="3"/>
+    <!-- Inner Cutout / Hole with Bevel -->
+    <ellipse cx="180" cy="170" rx="24" ry="46" fill="#FFFFFF"/>
+    <ellipse cx="182" cy="172" rx="24" ry="46" fill="none" stroke="url(#steel-blue-side)" stroke-width="4"/>
+
+    <!-- ==================== "X" (Textured Mesh Multiplier) ==================== -->
+    <!-- X 3D Outer Rim (Beveled Chrome Frame) -->
+    <!-- Left-to-Right diagonal stroke -->
+    <polygon points="248,82 284,82 396,252 360,252" fill="url(#silver-chrome-rim)" stroke="#505A65" stroke-width="2"/>
+    <polygon points="252,86 280,86 392,248 364,248" fill="url(#mesh-grid)" stroke="#A0ACB8" stroke-width="1.5"/>
+
+    <!-- Right-to-Left diagonal stroke -->
+    <polygon points="364,82 400,82 288,252 252,252" fill="url(#silver-chrome-rim)" stroke="#505A65" stroke-width="2"/>
+    <polygon points="368,86 396,86 284,248 256,248" fill="url(#mesh-grid)" stroke="#A0ACB8" stroke-width="1.5"/>
+
+    <!-- Center intersection chrome border highlight -->
+    <circle cx="324" cy="167" r="14" fill="none" stroke="url(#silver-chrome-rim)" stroke-width="3" opacity="0.8"/>
+
+    <!-- ==================== "Graph" ==================== -->
+    <!-- "G" -->
+    <g transform="translate(420, 78)">
+      <!-- 3D Extrusion Edge -->
+      <path d="M 108 58 C 102 34 82 20 54 20 C 22 20 0 46 0 88 C 0 132 24 158 58 158 C 92 158 110 136 112 104 L 56 104 L 56 86 L 128 86 C 130 148 94 178 54 178 C 12 178 -18 138 -18 88 C -18 36 16 -2 58 -2 C 96 -2 124 18 130 54 Z" fill="url(#silver-chrome-rim)"/>
+      <!-- Main Face -->
+      <path d="M 104 56 C 98 34 80 22 54 22 C 24 22 4 48 4 88 C 4 128 26 154 58 154 C 88 154 104 132 106 106 L 56 106 L 56 88 L 122 88 C 124 144 92 172 54 172 C 16 172 -12 134 -12 88 C -12 40 18 2 58 2 C 92 2 118 20 124 54 Z" fill="url(#silver-body)" stroke="#FFFFFF" stroke-width="2"/>
+    </g>
+
+    <!-- "r" -->
+    <g transform="translate(566, 138)">
+      <rect x="2" y="4" width="22" height="98" rx="6" fill="url(#silver-chrome-rim)"/>
+      <rect x="0" y="0" width="22" height="98" rx="6" fill="url(#silver-body)" stroke="#FFFFFF" stroke-width="1.5"/>
+      <path d="M 22 36 C 28 14 46 6 64 6 L 64 26 C 48 26 36 34 26 48 L 26 98 L 4 98" fill="url(#silver-body)"/>
+    </g>
+
+    <!-- "a" -->
+    <g transform="translate(642, 138)">
+      <!-- 3D Shadow -->
+      <path d="M 44 2 C 18 2 0 18 0 46 C 0 74 18 98 46 98 C 62 98 74 88 80 78 L 80 96 L 98 96 L 98 44 C 98 14 74 2 44 2 Z M 48 22 C 68 22 78 36 78 52 C 78 74 64 82 48 82 C 30 82 22 70 22 52 C 22 34 32 22 48 22 Z" fill="url(#silver-chrome-rim)" transform="translate(2, 3)"/>
+      <!-- Face -->
+      <path d="M 44 2 C 18 2 0 18 0 46 C 0 74 18 98 46 98 C 62 98 74 88 80 78 L 80 96 L 98 96 L 98 44 C 98 14 74 2 44 2 Z M 48 22 C 68 22 78 36 78 52 C 78 74 64 82 48 82 C 30 82 22 70 22 52 C 22 34 32 22 48 22 Z" fill="url(#silver-body)" stroke="#FFFFFF" stroke-width="1.5"/>
+    </g>
+
+    <!-- "p" -->
+    <g transform="translate(754, 138)">
+      <!-- Extrusion -->
+      <rect x="2" y="3" width="22" height="138" rx="6" fill="url(#silver-chrome-rim)"/>
+      <!-- Face Stem -->
+      <rect x="0" y="0" width="22" height="138" rx="6" fill="url(#silver-body)" stroke="#FFFFFF" stroke-width="1.5"/>
+      <!-- Loop -->
+      <path d="M 22 48 C 22 18 42 2 70 2 C 98 2 118 20 118 50 C 118 80 98 98 70 98 C 42 98 22 82 22 48 Z M 44 50 C 44 70 54 82 70 82 C 86 82 96 70 96 50 C 96 30 86 18 70 18 C 54 18 44 30 44 50 Z" fill="url(#silver-body)" stroke="#FFFFFF" stroke-width="1.5"/>
+    </g>
+
+    <!-- "h" -->
+    <g transform="translate(886, 92)">
+      <!-- Tall Stem -->
+      <rect x="2" y="3" width="22" height="144" rx="6" fill="url(#silver-chrome-rim)"/>
+      <rect x="0" y="0" width="22" height="144" rx="6" fill="url(#silver-body)" stroke="#FFFFFF" stroke-width="1.5"/>
+      <!-- Arch -->
+      <path d="M 22 84 C 30 60 50 48 72 48 C 96 48 108 62 108 86 L 108 144 L 86 144 L 86 92 C 86 76 78 68 64 68 C 50 68 38 78 28 92 L 28 144 L 6 144" fill="url(#silver-body)"/>
+    </g>
+
+  </g>
+</svg>

@@ -1,7 +1,7 @@
 import React from 'react';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'ghost' | 'outline';
+  variant?: 'primary' | 'ghost' | 'outline' | 'secondary';
   size?: 'sm' | 'md' | 'lg';
   icon?: React.ReactNode;
   iconPosition?: 'left' | 'right';
@@ -20,24 +20,26 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const sizeStyles = {
-    sm: 'px-3 py-1.5 text-xs rounded-[6px] gap-1.5',
-    md: 'px-5 py-2.5 text-sm rounded-[6px] gap-2',
-    lg: 'px-7 py-3.5 text-base rounded-[8px] gap-2.5 font-bold',
+    sm: 'px-3 py-1.5 text-xs rounded-lg gap-1.5',
+    md: 'px-5 py-2.5 text-sm rounded-xl gap-2 font-semibold',
+    lg: 'px-7 py-3.5 text-base rounded-xl gap-2.5 font-bold',
   }[size];
 
   const variantStyles = {
     primary:
-      'bg-[#c8ff3d] text-[#07080b] font-bold shadow-[0_0_20px_rgba(200,255,61,0.25)] hover:bg-[#d6ff66] hover:scale-[1.02] active:scale-[0.98] border border-[#c8ff3d]',
+      'bg-[#005BE6] text-white font-semibold shadow-sm hover:bg-[#1E40AF] hover:shadow transition-all border border-[#005BE6]',
+    secondary:
+      'bg-[#DFECFF] text-[#005BE6] font-semibold hover:bg-[#cbe0ff] transition-all border border-[#005BE6]/20',
     ghost:
-      'bg-transparent text-[var(--text)] hover:bg-[var(--surface-2)] border border-[var(--border)] hover:border-white/20 active:scale-[0.98]',
+      'bg-transparent text-gray-700 hover:text-[#005BE6] hover:bg-slate-100 transition-all border border-transparent',
     outline:
-      'bg-[var(--surface-1)] text-[var(--text)] hover:border-[#c8ff3d]/60 border border-[var(--border)] active:scale-[0.98]',
+      'bg-white text-gray-700 hover:bg-slate-50 border border-slate-200 transition-all shadow-xs',
   }[variant];
 
   return (
     <button
       disabled={disabled}
-      className={`relative inline-flex items-center justify-center font-medium transition-all duration-200 cursor-pointer select-none outline-none focus-visible:ring-2 focus-visible:ring-[#c8ff3d] focus-visible:ring-offset-2 focus-visible:ring-offset-[#07080b] disabled:opacity-50 disabled:pointer-events-none ${sizeStyles} ${variantStyles} ${className}`}
+      className={`relative inline-flex items-center justify-center transition-all duration-200 cursor-pointer select-none outline-none focus-visible:ring-2 focus-visible:ring-[#005BE6] focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ${sizeStyles} ${variantStyles} ${className}`}
       {...props}
     >
       {icon && iconPosition === 'left' && <span className="inline-flex shrink-0">{icon}</span>}

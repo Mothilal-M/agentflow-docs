@@ -7,10 +7,11 @@
     "dev": "turbo dev",
     "dev:landing": "pnpm --filter @10xgraph/landing dev",
     "dev:docs": "pnpm --filter 10xgraph-docs dev",
-    "build": "turbo build",
+    "build": "cross-env NODE_OPTIONS=--max-old-space-size=4096 turbo build",
     "check": "turbo check"
   },
   "devDependencies": {
+    "cross-env": "^10.1.0",
     "turbo": "^2.4.4",
     "typescript": "^5.9.3"
   },

@@ -1,12 +1,12 @@
 ---
-// FeatureBento: 6 Core Engineering Superpowers of 10xGraph
+// apps/landing/src/components/FeatureBento.astro
 ---
 
 <section class="bento-section" id="features">
   <div class="bento-container">
     <div class="bento-header">
       <span class="bento-tag">ENGINEERING FOUNDATIONS</span>
-      <h2 class="bento-title">Built for Systems That Cannot Afford to Hallucinate or Crash</h2>
+      <h2 class="bento-title">Built for Systems That Cannot Afford to Crash</h2>
       <p class="bento-desc">
         Every design decision in 10xGraph prioritizes determinism, state recovery, and production isolation over toy demo scripts.
       </p>
@@ -26,7 +26,7 @@
               <span class="crash-badge">⚡ WORKER CRASH (Process Killed)</span>
             </div>
             <div class="ledger-row resume">
-              <span class="ledger-icon text-signal">↻</span>
+              <span class="ledger-icon text-primary">↻</span>
               <span class="ledger-text">Resume execution from checkpoint 0x4e2</span>
               <span class="ledger-status status-skip">SKIPPED (No Double Charge)</span>
             </div>
@@ -101,49 +101,59 @@
         </div>
       </div>
 
-      <!-- Tile 4: Streaming Telemetry -->
+      <!-- Tile 4: Streaming Tokens -->
       <div class="bento-card">
         <div class="card-visual">
-          <div class="stream-box">
+          <div class="stream-demo">
             <div class="stream-header">
-              <span class="stream-pulse"></span>
-              <span>SSE STREAM (text/event-stream)</span>
+              <span class="stream-dot"></span>
+              <span class="stream-label">SSE EventStream</span>
             </div>
-            <div class="stream-chunks">
-              <span class="chunk">event: node_start</span>
-              <span class="chunk">data: &#123;"node": "verifier"&#125;</span>
-              <span class="chunk highlight">token: "Calculating"</span>
-              <span class="chunk highlight">token: " optimal"</span>
-              <span class="chunk highlight">token: " route..."</span>
+            <div class="stream-line">
+              <span class="event-type">event: node_progress</span>
+            </div>
+            <div class="stream-line">
+              <span class="event-data">&#123;"node": "verifier", "status": "running"&#125;</span>
+            </div>
+            <div class="stream-line stream-token">
+              <span class="token-val">"Compiling refund analysis report..."</span>
             </div>
           </div>
         </div>
         <div class="card-content">
-          <span class="feature-tag">TELEMETRY</span>
-          <h3 class="card-title">Real-Time Event Streaming</h3>
+          <span class="feature-tag">REAL-TIME TELEMETRY</span>
+          <h3 class="card-title">Native SSE &amp; WebSocket Streaming</h3>
           <p class="card-desc">
-            Stream tokens, tool inputs, and node lifecycle events over Server-Sent Events (SSE) and WebSockets with zero client buffering.
+            Stream token chunks, node state changes, and intermediate tool responses directly to your web frontend with zero buffering lag.
           </p>
         </div>
       </div>
 
-      <!-- Tile 5: Multi-Agent Handoffs -->
+      <!-- Tile 5: Multi-Agent Swarms -->
       <div class="bento-card">
         <div class="card-visual">
-          <div class="swarm-visual">
-            <div class="swarm-node core">Orchestrator</div>
-            <div class="swarm-branches">
-              <div class="swarm-node sub">Coder</div>
-              <div class="swarm-node sub">Tester</div>
-              <div class="swarm-node sub">Auditor</div>
+          <div class="swarm-flow">
+            <div class="swarm-node coordinator">
+              <span class="swarm-label">COORDINATOR</span>
+              <span class="swarm-task">Route intent</span>
+            </div>
+            <div class="swarm-arrow">→</div>
+            <div class="swarm-node specialist">
+              <span class="swarm-label">SPECIALIST</span>
+              <span class="swarm-task">Run tool graph</span>
+            </div>
+            <div class="swarm-arrow">→</div>
+            <div class="swarm-node auditor">
+              <span class="swarm-label">AUDITOR</span>
+              <span class="swarm-task">Verify ledger</span>
             </div>
           </div>
         </div>
         <div class="card-content">
-          <span class="feature-tag">MULTI-AGENT SWARMS</span>
-          <h3 class="card-title">Deterministic Agent Handoffs</h3>
+          <span class="feature-tag">AGENT ORCHESTRATION</span>
+          <h3 class="card-title">Multi-Agent Swarm Handoffs</h3>
           <p class="card-desc">
-            Coordinate autonomous agent clusters with typed state contracts. Dynamic routing without cascading prompt degradation.
+            Assemble multi-agent networks with typed state handoffs. Coordinator agents delegate subroutines to domain specialists deterministically.
           </p>
         </div>
       </div>
@@ -153,40 +163,49 @@
 
 <style>
   .bento-section {
-    padding: 7rem 1.5rem;
-    background: var(--surface-1);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+    padding: 6rem 0;
+    background: #ffffff;
   }
   .bento-container {
-    max-width: 1240px;
+    max-width: 1200px;
     margin: 0 auto;
+    padding: 0 1.5rem;
   }
   .bento-header {
     text-align: center;
-    max-width: 780px;
-    margin: 0 auto 4.5rem;
+    max-width: 720px;
+    margin: 0 auto 4rem;
   }
   .bento-tag {
     font-family: var(--font-mono);
     font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--signal);
+    font-weight: 800;
+    color: #005be6;
     letter-spacing: 0.1em;
-    text-transform: uppercase;
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: #dfecff;
+    border-radius: 9999px;
+    margin-bottom: 1rem;
   }
   .bento-title {
     font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-size: 2.25rem;
     font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1.15;
-    margin: 0.75rem 0 1.25rem;
+    color: #0d0d0d;
+    letter-spacing: -0.025em;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  @media (min-width: 768px) {
+    .bento-title {
+      font-size: 2.75rem;
+    }
   }
   .bento-desc {
     font-size: 1.05rem;
-    line-height: 1.6;
     color: var(--text-muted);
+    line-height: 1.6;
   }
   .bento-grid {
     display: grid;
@@ -211,26 +230,28 @@
   }
 
   .bento-card {
-    background: var(--bg);
+    background: #ffffff;
     border: 1px solid var(--border);
-    border-radius: var(--radius-xl);
+    border-radius: var(--radius-lg);
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: transform var(--transition-fast), border-color var(--transition-fast);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .bento-card:hover {
-    border-color: rgba(200, 255, 61, 0.4);
+    border-color: #005be6;
+    box-shadow: 0 10px 30px rgba(0, 91, 230, 0.08);
     transform: translateY(-3px);
   }
   .card-visual {
-    padding: 2rem;
+    padding: 1.75rem;
     min-height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--surface-2);
+    background: #f8fafc;
     border-bottom: 1px solid var(--border);
   }
   .card-content {
@@ -240,19 +261,20 @@
     font-family: var(--font-mono);
     font-size: 0.7rem;
     font-weight: 800;
-    color: var(--signal);
+    color: #005be6;
     letter-spacing: 0.08em;
     display: block;
     margin-bottom: 0.4rem;
   }
   .card-title {
     font-family: var(--font-display);
-    font-size: 1.35rem;
+    font-size: 1.25rem;
     font-weight: 700;
+    color: #0d0d0d;
     margin-bottom: 0.6rem;
   }
   .card-desc {
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     line-height: 1.6;
     color: var(--text-muted);
   }
@@ -272,22 +294,22 @@
     justify-content: space-between;
     padding: 0.65rem 0.9rem;
     border-radius: var(--radius-sm);
-    background: var(--surface-1);
+    background: #ffffff;
     border: 1px solid var(--border);
   }
-  .ledger-icon { font-weight: bold; margin-right: 0.5rem; color: #27c93f; }
-  .text-signal { color: var(--signal) !important; }
+  .ledger-icon { font-weight: bold; margin-right: 0.5rem; color: #3eaf3f; }
+  .text-primary { color: #005be6 !important; }
   .ledger-status {
     font-size: 0.68rem;
     font-weight: bold;
     padding: 0.15rem 0.45rem;
     border-radius: 4px;
-    background: rgba(39, 201, 63, 0.15);
-    color: #27c93f;
+    background: #ecfdf5;
+    color: #10b981;
   }
   .status-skip {
-    background: rgba(200, 255, 61, 0.15);
-    color: var(--signal);
+    background: #dfecff;
+    color: #005be6;
   }
   .ledger-crash-line {
     text-align: center;
@@ -296,11 +318,11 @@
   .crash-badge {
     font-size: 0.65rem;
     font-weight: 800;
-    color: var(--danger);
-    background: rgba(255, 107, 107, 0.1);
+    color: #e14942;
+    background: #fef2f2;
     padding: 0.2rem 0.6rem;
     border-radius: 9999px;
-    border: 1px solid rgba(255, 107, 107, 0.2);
+    border: 1px solid rgba(225, 73, 66, 0.2);
   }
 
   /* Sim 2: Memory */
@@ -318,22 +340,22 @@
     border: 1px solid var(--border);
   }
   .memory-tier.hot {
-    background: rgba(94, 230, 240, 0.05);
-    border-color: rgba(94, 230, 240, 0.3);
+    background: #f0f7ff;
+    border-color: rgba(0, 91, 230, 0.3);
   }
   .memory-tier.cold {
-    background: rgba(255, 255, 255, 0.02);
+    background: #ffffff;
   }
   .tier-label {
     font-family: var(--font-mono);
     font-size: 0.72rem;
     font-weight: 800;
-    color: var(--data-edge);
+    color: #005be6;
   }
   .tier-speed {
     font-size: 0.85rem;
     font-weight: 700;
-    color: var(--text);
+    color: #0d0d0d;
   }
   .tier-sub {
     font-size: 0.72rem;
@@ -349,75 +371,94 @@
   .rbac-row {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
-    padding: 0.4rem 0.6rem;
+    padding: 0.45rem 0.75rem;
     border-bottom: 1px solid var(--border);
     align-items: center;
   }
   .rbac-row.header {
-    font-weight: 700;
+    font-weight: 800;
     color: var(--text-muted);
+    background: #f1f5f9;
+    border-radius: 6px 6px 0 0;
   }
-  .check-green { color: #27c93f; font-weight: bold; }
-  .cross-red { color: var(--danger); font-weight: bold; }
+  .rbac-row:last-child {
+    border-bottom: none;
+  }
+  .tool-name { color: #0d0d0d; font-weight: 600; }
+  .check-green { color: #3eaf3f; font-weight: bold; }
+  .cross-red { color: #e14942; font-weight: bold; }
 
   /* Sim 4: Stream */
-  .stream-box {
+  .stream-demo {
     width: 100%;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    background: var(--surface-1);
+    background: #ffffff;
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-    padding: 0.75rem;
+    padding: 0.75rem 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
   }
   .stream-header {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-weight: 800;
-    color: var(--signal);
+    gap: 0.4rem;
     margin-bottom: 0.5rem;
   }
-  .stream-pulse {
+  .stream-dot {
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--signal);
-    animation: stream-blink 1s infinite alternate;
+    background: #3eaf3f;
   }
-  @keyframes stream-blink { from { opacity: 0.2; } to { opacity: 1; } }
-  .stream-chunks {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
+  .stream-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text-muted);
   }
-  .chunk.highlight { color: #5ee6f0; }
+  .stream-line {
+    padding: 0.15rem 0;
+  }
+  .event-type { color: #005be6; }
+  .event-data { color: var(--text-muted); }
+  .stream-token { color: #0d0d0d; font-weight: 600; }
+  .token-val { color: #005be6; }
 
   /* Sim 5: Swarm */
-  .swarm-visual {
+  .swarm-flow {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 0.85rem;
+    justify-content: space-between;
+    width: 100%;
+    gap: 0.4rem;
   }
   .swarm-node {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 0.35rem 0.85rem;
-    border-radius: 9999px;
-  }
-  .swarm-node.core {
-    background: var(--signal);
-    color: var(--signal-text);
-  }
-  .swarm-branches {
+    flex: 1;
     display: flex;
-    gap: 0.5rem;
-  }
-  .swarm-node.sub {
-    background: var(--surface-1);
+    flex-direction: column;
+    padding: 0.55rem;
+    border-radius: var(--radius-sm);
+    background: #ffffff;
     border: 1px solid var(--border);
-    color: var(--text-muted);
+    text-align: center;
+  }
+  .swarm-node.specialist {
+    background: #dfecff;
+    border-color: rgba(0, 91, 230, 0.4);
+  }
+  .swarm-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: #005be6;
+  }
+  .swarm-task {
+    font-size: 0.68rem;
+    color: #0d0d0d;
+    margin-top: 0.15rem;
+  }
+  .swarm-arrow {
+    color: #005be6;
+    font-weight: bold;
+    font-size: 0.9rem;
   }
 </style>

@@ -1,43 +1,57 @@
 /* ==========================================================================
    10xGraph Shared Design Tokens (packages/ui/src/tokens.css)
-   Derived from DESIGN.md - The Living Graph System
+   Derived from DESIGN.md - hire10x White & Blue Theme
    ========================================================================== */
 
 :root {
-  /* Dark Theme (Default) */
-  --bg: #07080b;
-  --surface-1: #0e1014;
-  --surface-2: #151820;
-  --surface-hover: #1b1f2a;
+  /* hire10x White & Blue Core (Default) */
+  --bg: #ffffff;
+  --surface-1: #f8fafc; /* slate-50 */
+  --surface-2: #f1f5f9; /* slate-100 */
+  --surface-hover: #e2e8f0; /* slate-200 */
   
-  --border: rgba(255, 255, 255, 0.08);
-  --border-subtle: rgba(255, 255, 255, 0.04);
-  --border-glow: rgba(200, 255, 61, 0.35);
+  --border: #e2e8f0;
+  --border-subtle: #f1f5f9;
+  --border-glow: rgba(0, 91, 230, 0.2);
 
-  --text: #eceae3;
-  --text-muted: #8d9199;
-  --text-faint: #525660;
+  --text: #0d0d0d;
+  --text-muted: #6b7280; /* gray-500 */
+  --text-faint: #9ca3af; /* gray-400 */
 
-  /* Accent Signals */
-  --signal: #c8ff3d;
-  --signal-hover: #d6ff66;
-  --signal-glow: rgba(200, 255, 61, 0.35);
-  --signal-text: #07080b;
+  /* Accent Signals: Cobalt Blue */
+  --primary: #005be6;
+  --primary-hover: #1e40af;
+  --primary-wash: #dfecff;
+  --primary-10: rgba(0, 91, 230, 0.08);
 
-  --data-edge: #5ee6f0;
-  --data-edge-glow: rgba(94, 230, 240, 0.3);
+  --signal: #005be6;
+  --signal-hover: #1e40af;
+  --signal-glow: rgba(0, 91, 230, 0.25);
+  --signal-text: #ffffff;
 
-  --checkpoint: #ffb454;
-  --checkpoint-glow: rgba(255, 180, 84, 0.3);
+  --data-edge: #005be6;
+  --data-edge-glow: rgba(0, 91, 230, 0.2);
 
-  --danger: #ff6b6b;
-  --danger-glow: rgba(255, 107, 107, 0.3);
+  --checkpoint: #3eaf3f;
+  --checkpoint-glow: rgba(62, 175, 63, 0.25);
+
+  --danger: #e14942;
+  --danger-glow: rgba(225, 73, 66, 0.25);
+
+  --warning: #ff9e0d;
+  --warning-glow: rgba(255, 158, 13, 0.25);
 
   /* Geometry & Radii */
   --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
   --radius-xl: 20px;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 10px 25px -5px rgba(0, 91, 230, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  --shadow-mockup: 0 25px 50px -12px rgba(0, 91, 230, 0.12), 0 0 0 1px rgba(226, 232, 240, 0.9);
 
   /* Motion Curves */
   --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
@@ -46,60 +60,54 @@
   --transition-slow: 700ms var(--ease-spring);
 
   /* Typography */
-  --font-display: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-body: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'Geist Mono', 'JetBrains Mono', ui-monospace, monospace;
+  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 }
 
-/* Light Theme (Used on Docs Reading Mode) */
-[data-theme='light'], .light {
-  --bg: #f6f5f0;
-  --surface-1: #ffffff;
-  --surface-2: #efede6;
-  --surface-hover: #e5e2d6;
+/* Dark Theme Variant */
+[data-theme='dark'], .dark {
+  --bg: #0b0f17;
+  --surface-1: #111827;
+  --surface-2: #1f2937;
+  --surface-hover: #374151;
 
-  --border: rgba(12, 14, 18, 0.08);
-  --border-subtle: rgba(12, 14, 18, 0.04);
-  --border-glow: rgba(47, 107, 18, 0.25);
+  --border: rgba(255, 255, 255, 0.1);
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --border-glow: rgba(0, 91, 230, 0.35);
 
-  --text: #0c0e12;
-  --text-muted: #5b5f66;
-  --text-faint: #8d9199;
+  --text: #f9fafb;
+  --text-muted: #9ca3af;
+  --text-faint: #6b7280;
 
-  --signal: #2f6b12;
-  --signal-hover: #26570e;
-  --signal-glow: rgba(47, 107, 18, 0.25);
+  --primary: #3b82f6;
+  --primary-hover: #60a5fa;
+  --primary-wash: rgba(59, 130, 246, 0.15);
+  --primary-10: rgba(59, 130, 246, 0.1);
+
+  --signal: #3b82f6;
+  --signal-hover: #60a5fa;
+  --signal-glow: rgba(59, 130, 246, 0.35);
   --signal-text: #ffffff;
 
-  --data-edge: #0e7c86;
-  --data-edge-glow: rgba(14, 124, 134, 0.2);
+  --data-edge: #60a5fa;
+  --data-edge-glow: rgba(96, 165, 250, 0.25);
 
-  --checkpoint: #9a5b00;
-  --checkpoint-glow: rgba(154, 91, 0, 0.2);
+  --checkpoint: #4ade80;
+  --checkpoint-glow: rgba(74, 222, 128, 0.25);
 
-  --danger: #b4232c;
-  --danger-glow: rgba(180, 35, 44, 0.2);
+  --danger: #f87171;
+  --danger-glow: rgba(248, 113, 113, 0.25);
 }
 
-/* Visual Background Patterns */
-.bg-grid-graph {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+/* Background Grid Helpers */
+.bg-grid-paper {
+  background-image: linear-gradient(to right, rgba(0, 91, 230, 0.04) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(0, 91, 230, 0.04) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
-.light .bg-grid-graph {
-  background-image: radial-gradient(rgba(12, 14, 18, 0.06) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-
-.bg-dot-paper {
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
-}
-
-.light .bg-dot-paper {
-  background-image: linear-gradient(to right, rgba(12, 14, 18, 0.04) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(12, 14, 18, 0.04) 1px, transparent 1px);
-  background-size: 40px 40px;
+.bg-dot-matrix {
+  background-image: radial-gradient(rgba(0, 91, 230, 0.08) 1.5px, transparent 1.5px);
+  background-size: 20px 20px;
 }
